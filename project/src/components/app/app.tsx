@@ -1,5 +1,19 @@
-function App(): JSX.Element {
-  return <p>Hello, world!</p>;
+import MainScreen from '../main-screen/main-screen';
+
+type Props = {
+  filmCardTitle: string;
+  filmCardGenre: string;
+  filmCardYear: number;
+};
+
+function App({ filmCardTitle, filmCardGenre, filmCardYear }: Props) {
+  return (
+    <MainScreen
+      filmCardTitle={filmCardTitle}
+      filmCardGenre={filmCardGenre}
+      filmCardYear={filmCardYear}
+    />
+  );
 }
 
 export default App;
