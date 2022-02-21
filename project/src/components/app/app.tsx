@@ -1,18 +1,13 @@
-import MainScreen from '../main-screen/main-screen';
+import Main from '../../pages/main';
+import { PromoCardType } from '../../mocks/mocks';
 
-type Props = {
-  filmCardTitle: string;
-  filmCardGenre: string;
-  filmCardYear: number;
+type AppProps = {
+  PromoCard: PromoCardType,
 };
 
-function App({ filmCardTitle, filmCardGenre, filmCardYear }: Props) {
+function App({ PromoCard }: AppProps) {
   return (
-    <MainScreen
-      filmCardTitle={filmCardTitle}
-      filmCardGenre={filmCardGenre}
-      filmCardYear={filmCardYear}
-    />
+    <Main filmPromoCard = {PromoCard}/>
   );
 }
 

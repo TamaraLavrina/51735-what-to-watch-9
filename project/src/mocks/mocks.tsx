@@ -1,4 +1,4 @@
-const FilmsList = [
+const filmsList = [
   {
     filmTitle: 'Fantastic Beasts: The Crimes of Grindelwald',
     filmImage: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
@@ -99,4 +99,31 @@ const FilmsList = [
   },
 ];
 
-export default FilmsList;
+enum Genres {
+  'All genres',
+  'Comedies',
+  'Documentary',
+  'Dramas',
+  'Horror',
+  'Kids & Family',
+  'Romance',
+  'Sci-Fi',
+  'Thrillers'
+}
+
+
+const PromoBudapest = {
+  image: 'the-grand-budapest-hotel-poster.jpg',
+  name: 'The Grand Budapest Hotel',
+  genre: 'Drama',
+  year: 2014,
+};
+
+export type PromoCardType = {
+  image?: string,
+  name: string,
+  genre: string,
+  year: number,
+}
+
+export {Genres,  PromoBudapest, filmsList };

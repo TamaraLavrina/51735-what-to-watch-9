@@ -2,19 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
-const MainScreenData = {
-  name: 'The Grand Budapest Hotel',
+const PromoCard = {
+  image: 'the-grand-budapest-hotel-poster.jpg',
+  name: 'The Grand Budapest Hotel poster',
   genre: 'Drama',
   year: 2014,
 };
 
-
 ReactDOM.render(
   <React.StrictMode>
-    <App
-      filmCardTitle={MainScreenData.name}
-      filmCardGenre={MainScreenData.genre}
-      filmCardYear={MainScreenData.year}
-    />
+    <App PromoCard = {PromoCard} />
   </React.StrictMode>,
   document.getElementById('root'));
