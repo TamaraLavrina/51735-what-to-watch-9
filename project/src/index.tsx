@@ -11,6 +11,8 @@ const PromoCard = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App PromoCard = {PromoCard} />
+    <App
+      PromoCard = {PromoCard}
+    />
   </React.StrictMode>,
   document.getElementById('root'));
