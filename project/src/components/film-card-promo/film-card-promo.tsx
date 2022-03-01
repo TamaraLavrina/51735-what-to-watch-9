@@ -7,19 +7,19 @@ type FilmCardPromoProps = {
 }
 
 function FilmCardPromo({Promofilm, className=''}: FilmCardPromoProps): JSX.Element {
-  const {image, name, genre, year} = Promofilm;
+  const {poster, title, genre, releaseDate} = Promofilm;
   return (
     <div className={`film-card__wrap ${className}`}>
       <div className="film-card__info">
         <div className="film-card__poster">
-          <img src={`img/${image}`} alt={name} width="218" height="327" />
+          <img src={poster} alt={title} width="218" height="327" />
         </div>
 
         <div className="film-card__desc">
-          <h2 className="film-card__title">{name}</h2>
+          <h2 className="film-card__title">{title}</h2>
           <p className="film-card__meta">
             <span className="film-card__genre">{genre}</span>
-            <span className="film-card__year">{year}</span>
+            <span className="film-card__year">{releaseDate}</span>
           </p>
 
           <FilmButtons />

@@ -1,23 +1,30 @@
+import { PromoCardType } from  '../../mocks/mocks';
+import { Link } from 'react-router-dom';
+
 type SmallFilmCardProps = {
-  filmTitle: string;
-  filmImage: string;
+  film: PromoCardType,
+  isActive: boolean,
+  onHover: (id: number | null) => void,
 };
 
-function SmallFilmCard({ filmTitle, filmImage }: SmallFilmCardProps): JSX.Element{
+function SmallFilmCard({ film, isActive, onHover }: SmallFilmCardProps): JSX.Element{
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card"
+      onMouseEnter={() => onHover(film.id)}
+      onMouseLeave={() => onHover(null)}
+    >
       <div className="small-film-card__image">
         <img
-          src={filmImage}
-          alt={filmTitle}
+          src={film.previewImg}
+          alt={film.title}
           width="280"
           height="175"
         />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">
-          {filmTitle}
-        </a>
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>
+          {film.title}
+        </Link>
       </h3>
     </article>
   );

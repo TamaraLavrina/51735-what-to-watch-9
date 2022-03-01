@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
+import { films } from './mocks/mocks';
 
-const PromoCard = {
-  image: 'the-grand-budapest-hotel-poster.jpg',
-  name: 'The Grand Budapest Hotel poster',
-  genre: 'Drama',
-  year: 2014,
-};
 
 ReactDOM.render(
   <React.StrictMode>
-    <App PromoCard = {PromoCard} />
+    <App
+      PromoCard = {films[0]}
+      CatalogFilms = {films}
+    />
   </React.StrictMode>,
   document.getElementById('root'));

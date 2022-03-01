@@ -1,37 +1,47 @@
-
+import {useState} from 'react';
 import CardNav from '../components/card-nav/card-nav';
-import FilmCardPromo from '../components/film-card-promo/film-card-promo';
+import FilmButtons from '../components/film-buttons/film-buttons';
 import Footer from '../components/footer/footer';
 import Header from '../components/header/header';
 import SmallFilmCard from '../components/small-film-card/small-film-card';
-import { PromoCardType, filmsList } from '../mocks/mocks';
+import { PromoCardType} from '../mocks/mocks';
 
 type MovieProps = {
-  movie:   PromoCardType
+  movie:   PromoCardType,
+  catalogFilms: PromoCardType[],
 }
 
-function Movie({movie}:MovieProps): JSX.Element {
+function Movie({movie, catalogFilms}:MovieProps): JSX.Element {
+  const [activeFilmId, setActiveFilmId] = useState<number | null>(null);
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={movie.backgroundImg} alt={movie.title}/>
           </div>
-
-          <h1 className="visually-hidden">WTW</h1>
 
           <Header />
 
-          <FilmCardPromo Promofilm={movie} />
+          <div className="film-card__wrap">
+            <div className="film-card__desc">
+              <h2 className="film-card__title">{movie.title}</h2>
+              <p className="film-card__meta">
+                <span className="film-card__genre">{movie.genre}</span>
+                <span className="film-card__year">{movie.releaseDate}</span>
+              </p>
 
+              <FilmButtons />
+
+            </div>
+          </div>
 
         </div>
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={movie.poster}alt={movie.title} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -56,9 +66,9 @@ function Movie({movie}:MovieProps): JSX.Element {
                    the recipient of a priceless painting and the chief suspect in her murder.
                 </p>
 
-                <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
+                <p className="film-card__director"><strong>Director: {movie.director}</strong></p>
 
-                <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                <p className="film-card__starring"><strong>Starring: {movie.starring}</strong></p>
               </div>
             </div>
           </div>
@@ -70,8 +80,14 @@ function Movie({movie}:MovieProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {filmsList.slice(2,5).map((item) => (
-              <SmallFilmCard key={item.filmTitle} filmTitle={item.filmTitle} filmImage={item.filmImage} />
+            {catalogFilms.slice(2,6).map((film) => (
+              <SmallFilmCard
+                key={film.id}
+                film={film}
+                isActive={film.id === activeFilmId}
+                onHover={setActiveFilmId}
+
+              />
             ))}
           </div>
         </section>

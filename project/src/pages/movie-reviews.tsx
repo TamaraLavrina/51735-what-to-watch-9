@@ -1,15 +1,18 @@
+import {useState} from 'react';
 import CardNav from '../components/card-nav/card-nav';
 import FilmButtons from '../components/film-buttons/film-buttons';
 import Footer from '../components/footer/footer';
 import Header from '../components/header/header';
 import SmallFilmCard from '../components/small-film-card/small-film-card';
-import { PromoCardType, filmsList } from '../mocks/mocks';
+import { PromoCardType } from '../mocks/mocks';
 
 type MovieReviewsProps ={
   movie: PromoCardType,
+  catalogFilms: PromoCardType[],
 }
 
-function MovieReviews({movie}:MovieReviewsProps):JSX.Element {
+function MovieReviews({movie, catalogFilms} :MovieReviewsProps):JSX.Element {
+  const [activeFilmId, setActiveFilmId] = useState<number | null>(null);
   return(
     <>
       <section className="film-card film-card--full">
@@ -143,7 +146,14 @@ function MovieReviews({movie}:MovieReviewsProps):JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {filmsList.slice(2,5).map((item) => <SmallFilmCard key={item.filmTitle} filmTitle={item.filmTitle} filmImage={item.filmImage} />)}
+            {catalogFilms.slice(2,6).map((film) => (
+              <SmallFilmCard
+                key={film.title}
+                film={film}
+                isActive={film.id === activeFilmId}
+                onHover={setActiveFilmId}
+              />
+            ))}
           </div>
         </section>
 
