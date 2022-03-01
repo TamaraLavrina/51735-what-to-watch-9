@@ -1,103 +1,103 @@
-const filmsList = [
-  {
-    title: 'Fantastic Beasts: The Crimes of Grindelwald',
-    previewImg: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
-  },
+// const filmsList = [
+//   {
+//     title: 'Fantastic Beasts: The Crimes of Grindelwald',
+//     previewImg: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
+//   },
 
-  {
-    title: 'Bohemian Rhapsody',
-    previewImg: 'img/bohemian-rhapsody.jpg',
-  },
+//   {
+//     title: 'Bohemian Rhapsody',
+//     previewImg: 'img/bohemian-rhapsody.jpg',
+//   },
 
-  {
-    title: 'Macbeth',
-    previewImg: 'img/macbeth.jpg',
-  },
+//   {
+//     title: 'Macbeth',
+//     previewImg: 'img/macbeth.jpg',
+//   },
 
-  {
-    title: 'Aviator',
-    previewImg: 'img/aviator.jpg',
-  },
-  {
-    title: 'We need to talk about Kevin',
-    previewImg: 'img/we-need-to-talk-about-kevin.jpg',
-  },
+//   {
+//     title: 'Aviator',
+//     previewImg: 'img/aviator.jpg',
+//   },
+//   {
+//     title: 'We need to talk about Kevin',
+//     previewImg: 'img/we-need-to-talk-about-kevin.jpg',
+//   },
 
-  {
-    title: 'What We Do in the Shadows',
-    previewImg: 'img/what-we-do-in-the-shadows.jpg',
-  },
+//   {
+//     title: 'What We Do in the Shadows',
+//     previewImg: 'img/what-we-do-in-the-shadows.jpg',
+//   },
 
-  {
-    title: 'Revenant',
-    previewImg: 'img/revenant.jpg',
-  },
+//   {
+//     title: 'Revenant',
+//     previewImg: 'img/revenant.jpg',
+//   },
 
-  {
-    title: 'Johnny English',
-    previewImg: 'img/johnny-english.jpg',
-  },
+//   {
+//     title: 'Johnny English',
+//     previewImg: 'img/johnny-english.jpg',
+//   },
 
-  {
-    title: 'Shutter Island',
-    previewImg: 'img/shutter-island.jpg',
-  },
+//   {
+//     title: 'Shutter Island',
+//     previewImg: 'img/shutter-island.jpg',
+//   },
 
-  {
-    title: 'Pulp Fiction',
-    previewImg: 'img/pulp-fiction.jpg',
-  },
+//   {
+//     title: 'Pulp Fiction',
+//     previewImg: 'img/pulp-fiction.jpg',
+//   },
 
-  {
-    title: 'No Country for Old Men',
-    previewImg: 'img/no-country-for-old-men.jpg',
-  },
+//   {
+//     title: 'No Country for Old Men',
+//     previewImg: 'img/no-country-for-old-men.jpg',
+//   },
 
-  {
-    title: 'Snatch',
-    previewImg: 'img/snatch.jpg',
-  },
+//   {
+//     title: 'Snatch',
+//     previewImg: 'img/snatch.jpg',
+//   },
 
-  {
-    title: 'Moonrise Kingdom',
-    previewImg: 'img/moonrise-kingdom.jpg',
-  },
+//   {
+//     title: 'Moonrise Kingdom',
+//     previewImg: 'img/moonrise-kingdom.jpg',
+//   },
 
-  {
-    title: 'Seven Years in Tibet',
-    previewImg: 'img/seven-years-in-tibet.jpg',
-  },
+//   {
+//     title: 'Seven Years in Tibet',
+//     previewImg: 'img/seven-years-in-tibet.jpg',
+//   },
 
-  {
-    title: 'Midnight Special',
-    previewImg: 'img/midnight-special.jpg',
-  },
+//   {
+//     title: 'Midnight Special',
+//     previewImg: 'img/midnight-special.jpg',
+//   },
 
-  {
-    title: 'War of the Worlds',
-    previewImg: 'img/war-of-the-worlds.jpg',
-  },
+//   {
+//     title: 'War of the Worlds',
+//     previewImg: 'img/war-of-the-worlds.jpg',
+//   },
 
-  {
-    title: 'Dardjeeling Limited',
-    previewImg: 'img/dardjeeling-limited.jpg',
-  },
+//   {
+//     title: 'Dardjeeling Limited',
+//     previewImg: 'img/dardjeeling-limited.jpg',
+//   },
 
-  {
-    title: 'Orlando',
-    previewImg: 'img/orlando.jpg',
-  },
+//   {
+//     title: 'Orlando',
+//     previewImg: 'img/orlando.jpg',
+//   },
 
-  {
-    title: 'Mindhunter',
-    previewImg: 'img/mindhunter.jpg',
-  },
+//   {
+//     title: 'Mindhunter',
+//     previewImg: 'img/mindhunter.jpg',
+//   },
 
-  {
-    title: 'Midnight Special',
-    previewImg: 'img/midnight-special.jpg',
-  },
-];
+//   {
+//     title: 'Midnight Special',
+//     previewImg: 'img/midnight-special.jpg',
+//   },
+// ];
 
 enum Genres {
   'All genres',
@@ -126,7 +126,7 @@ export type PromoCardType = {
   director?: string,
   duration?: number,
   genre?: string,
-  id?: number,
+  id: number,
   isInMyList?: boolean,
   movieLink?: string,
   poster?: string,
@@ -326,4 +326,4 @@ const films: PromoCardType[] = [
   },
 ];
 
-export {Genres,  PromoBudapest, filmsList, films };
+export {Genres,  PromoBudapest, films };

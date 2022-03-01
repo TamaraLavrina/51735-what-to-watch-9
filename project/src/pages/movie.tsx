@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import CardNav from '../components/card-nav/card-nav';
 import FilmButtons from '../components/film-buttons/film-buttons';
 import Footer from '../components/footer/footer';
@@ -11,6 +12,7 @@ type MovieProps = {
 }
 
 function Movie({movie, catalogFilms}:MovieProps): JSX.Element {
+  const [activeFilmId, setActiveFilmId] = useState<number | null>(null);
   return (
     <>
       <section className="film-card film-card--full">
@@ -39,7 +41,7 @@ function Movie({movie, catalogFilms}:MovieProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={movie.poster}alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={movie.poster}alt={movie.title} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -66,7 +68,7 @@ function Movie({movie, catalogFilms}:MovieProps): JSX.Element {
 
                 <p className="film-card__director"><strong>Director: {movie.director}</strong></p>
 
-                <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                <p className="film-card__starring"><strong>Starring: {movie.starring}</strong></p>
               </div>
             </div>
           </div>
@@ -82,6 +84,9 @@ function Movie({movie, catalogFilms}:MovieProps): JSX.Element {
               <SmallFilmCard
                 key={film.id}
                 film={film}
+                isActive={film.id === activeFilmId}
+                onHover={setActiveFilmId}
+
               />
             ))}
           </div>

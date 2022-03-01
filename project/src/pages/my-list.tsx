@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import Footer from '../components/footer/footer';
 import Logo from '../components/logo/logo';
 import SmallFilmCard from '../components/small-film-card/small-film-card';
@@ -10,6 +11,8 @@ type MyListProps = {
 
 
 function MyList({catalogFilms}: MyListProps): JSX.Element {
+  const [activeFilmId, setActiveFilmId] = useState<number | null>(null);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -28,6 +31,8 @@ function MyList({catalogFilms}: MyListProps): JSX.Element {
             <SmallFilmCard
               key={film.id}
               film={film}
+              isActive={film.id === activeFilmId}
+              onHover={setActiveFilmId}
             />
           ))}
         </div>
