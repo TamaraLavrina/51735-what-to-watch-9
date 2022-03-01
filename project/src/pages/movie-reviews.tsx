@@ -143,7 +143,12 @@ function MovieReviews({movie}:MovieReviewsProps):JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {filmsList.slice(2,5).map((item) => <SmallFilmCard key={item.filmTitle} filmTitle={item.filmTitle} filmImage={item.filmImage} />)}
+            {filmsList.slice(2,6).map((film) => (
+              <SmallFilmCard
+                key={film.title}
+                film={film}
+              />
+            ))}
           </div>
         </section>
 

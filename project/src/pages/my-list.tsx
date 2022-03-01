@@ -1,11 +1,15 @@
 import Footer from '../components/footer/footer';
-
 import Logo from '../components/logo/logo';
 import SmallFilmCard from '../components/small-film-card/small-film-card';
 import UserBlock from '../components/user-block/user-block';
-import { filmsList } from '../mocks/mocks';
+import { PromoCardType } from '../mocks/mocks';
 
-function MyList(): JSX.Element {
+type MyListProps = {
+  catalogFilms: PromoCardType[],
+}
+
+
+function MyList({catalogFilms}: MyListProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -20,8 +24,11 @@ function MyList(): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {filmsList.slice(1,10).map((item) => (
-            <SmallFilmCard key={item.filmTitle} filmTitle={item.filmTitle} filmImage={item.filmImage} />
+          {catalogFilms.slice(2,6).map((film) => (
+            <SmallFilmCard
+              key={film.id}
+              film={film}
+            />
           ))}
         </div>
       </section>
