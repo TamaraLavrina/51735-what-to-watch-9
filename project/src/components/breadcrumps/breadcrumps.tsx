@@ -1,13 +1,21 @@
-function Breadcrumbs(): JSX.Element {
+import { Link } from 'react-router-dom';
+import { PromoCardType } from '../../mocks/mocks';
+
+
+type BreadcrumbsProps ={
+  currentFilm: PromoCardType,
+}
+
+function Breadcrumbs({currentFilm}:BreadcrumbsProps): JSX.Element {
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
         <li className="breadcrumbs__item">
-          <a href="/#" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+          <Link to={`/films/${currentFilm.id}/`} className="breadcrumbs__link">{currentFilm.title}</Link>
         </li>
 
         <li className="breadcrumbs__item">
-          <a href="/#" className="breadcrumbs__link">Add review</a>
+          <Link className="breadcrumbs__link" to={`/films/${currentFilm.id}/review`}>Add review</Link>
         </li>
       </ul>
     </nav>

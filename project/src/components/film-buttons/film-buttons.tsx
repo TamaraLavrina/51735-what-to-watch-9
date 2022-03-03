@@ -1,8 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { Link } from 'react-router-dom';
+import { PromoCardType } from '../../mocks/mocks';
 
-function FilmButtons():JSX.Element {
+type FilmButtonsProps ={
+  currentFilm: PromoCardType,
+}
+
+function FilmButtons({currentFilm}:FilmButtonsProps):JSX.Element {
   const navigate = useNavigate();
   return (
     <div className="film-card__buttons">
@@ -20,7 +25,7 @@ function FilmButtons():JSX.Element {
         </svg>
         <span>My list</span>
       </button>
-      <Link to={AppRoute.AddReview} className="btn film-card__button">Add review</Link>
+      <Link  className="btn film-card__button" to={`/films/${currentFilm.id}/review`}>Add review</Link>
     </div>
   );
 }

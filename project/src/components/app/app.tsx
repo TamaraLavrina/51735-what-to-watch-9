@@ -20,7 +20,7 @@ function App({ PromoCard, CatalogFilms }: AppProps):JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Route} element={<Main filmPromoCard = {PromoCard} catalogFilms={CatalogFilms}/>}/>
-        <Route path={AppRoute.Movie} element={<Movie movie={PromoCard} catalogFilms={CatalogFilms}/>}/>
+        <Route path={AppRoute.Movie} element={<Movie catalogFilms={CatalogFilms}/>}/>
         <Route path={AppRoute.MyList} element={
           <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
             <MyList catalogFilms={CatalogFilms} />
@@ -29,7 +29,7 @@ function App({ PromoCard, CatalogFilms }: AppProps):JSX.Element {
         />
         <Route path={AppRoute.Player} element={<Player />} />
         <Route path={AppRoute.Login} element={<LogIn />} />
-        <Route path={AppRoute.AddReview} element={<AddReview />} />
+        <Route path={AppRoute.AddReview} element={<AddReview catalogFilms={CatalogFilms}/>} />
         <Route path="*" element={<NotFound />}/>
       </Routes>
     </BrowserRouter>

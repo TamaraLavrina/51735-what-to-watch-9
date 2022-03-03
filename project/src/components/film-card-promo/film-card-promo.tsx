@@ -22,7 +22,7 @@ function FilmCardPromo({Promofilm, className=''}: FilmCardPromoProps): JSX.Eleme
             <span className="film-card__year">{releaseDate}</span>
           </p>
 
-          <FilmButtons />
+          <FilmButtons currentFilm={Promofilm} />
 
         </div>
       </div>
