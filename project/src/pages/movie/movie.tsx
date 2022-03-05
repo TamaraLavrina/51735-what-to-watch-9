@@ -45,7 +45,6 @@ function Movie({catalogFilms}:MovieProps): JSX.Element {
 
             </div>
           </div>
-
         </div>
 
         <div className="film-card__wrap film-card__translate-top">
@@ -58,7 +57,6 @@ function Movie({catalogFilms}:MovieProps): JSX.Element {
               <CardNav />
 
               <div className="film-rating">
-
                 <div className="film-rating__score">{currentFilm.rating}</div>
                 <p className="film-rating__meta">
                   <span className="film-rating__level">Very good</span>
@@ -68,28 +66,23 @@ function Movie({catalogFilms}:MovieProps): JSX.Element {
 
               <div className="film-card__text">
                 <p>{currentFilm.description}</p>
-
                 <p className="film-card__director"><strong>Director: {currentFilm.director}</strong></p>
-
                 <p className="film-card__starring"><strong>Starring: {currentFilm.starring}</strong></p>
               </div>
             </div>
           </div>
         </div>
       </section>
-
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
           <div className="catalog__films-list">
-            {catalogFilms.slice(2,6).map((film) => (
+            {catalogFilms.slice(2, 6).map((film) => (
               <SmallFilmCard
                 key={film.id}
                 film={film}
                 isActive={film.id === activeFilmId}
                 onCardHover={setActiveFilmId}
-
               />
             ))}
           </div>
