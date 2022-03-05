@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 // import {MouseEvent} from 'react';
 import {useState} from 'react';
-import CardNav from '../components/card-nav/card-nav';
-import FilmButtons from '../components/film-buttons/film-buttons';
-import Footer from '../components/footer/footer';
-import Header from '../components/header/header';
-import SmallFilmCard from '../components/small-film-card/small-film-card';
-import { PromoCardType} from '../mocks/mocks';
-import NotFound from '../pages/not-found';
+import CardNav from '../../components/card-nav/card-nav';
+import FilmButtons from '../../components/film-buttons/film-buttons';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import { PromoCardType} from '../../mocks/mocks';
+import NotFound from '../../pages/not-found/not-found';
 
 type MovieProps = {
   catalogFilms: PromoCardType[],
@@ -88,7 +88,7 @@ function Movie({catalogFilms}:MovieProps): JSX.Element {
                 key={film.id}
                 film={film}
                 isActive={film.id === activeFilmId}
-                onHover={setActiveFilmId}
+                onCardHover={setActiveFilmId}
 
               />
             ))}

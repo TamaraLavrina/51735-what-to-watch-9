@@ -1,8 +1,8 @@
-import Header from '../components/header/header';
-import Footer from '../components/footer/footer';
-import FilmCardPromo from '../components/film-card-promo/film-card-promo';
-import { PromoCardType } from '../mocks/mocks';
-import CardNav from '../components/card-nav/card-nav';
+import Header from '../../components/header/header';
+import Footer from '../../components/footer/footer';
+import FilmCardPromo from '../../components/film-card-promo/film-card-promo';
+import { PromoCardType } from '../../mocks/mocks';
+import CardNav from '../../components/card-nav/card-nav';
 
 type MovieDetailsProps = {
   MovieInDetails: PromoCardType,
@@ -21,7 +21,7 @@ function MovieDetails({MovieInDetails}: MovieDetailsProps ):JSX.Element {
 
           <Header />
 
-          <FilmCardPromo Promofilm={MovieInDetails} />
+          <FilmCardPromo promofilm={MovieInDetails} />
 
         </div>
 

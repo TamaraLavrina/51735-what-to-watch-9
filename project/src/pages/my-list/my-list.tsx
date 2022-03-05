@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import Footer from '../components/footer/footer';
-import Logo from '../components/logo/logo';
-import SmallFilmCard from '../components/small-film-card/small-film-card';
-import UserBlock from '../components/user-block/user-block';
-import { PromoCardType } from '../mocks/mocks';
+import Footer from '../../components/footer/footer';
+import Logo from '../../components/logo/logo';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import UserBlock from '../../components/user-block/user-block';
+import { PromoCardType } from '../../mocks/mocks';
 
 type MyListProps = {
   catalogFilms: PromoCardType[],
@@ -27,12 +27,12 @@ function MyList({catalogFilms}: MyListProps): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {catalogFilms.slice(2,6).map((film) => (
+          {catalogFilms.slice(2, 6).map((film) => (
             <SmallFilmCard
               key={film.id}
               film={film}
               isActive={film.id === activeFilmId}
-              onHover={setActiveFilmId}
+              onCardHover={setActiveFilmId}
             />
           ))}
         </div>

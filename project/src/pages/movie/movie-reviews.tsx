@@ -1,10 +1,10 @@
 import {useState} from 'react';
-import CardNav from '../components/card-nav/card-nav';
-import FilmButtons from '../components/film-buttons/film-buttons';
-import Footer from '../components/footer/footer';
-import Header from '../components/header/header';
-import SmallFilmCard from '../components/small-film-card/small-film-card';
-import { PromoCardType } from '../mocks/mocks';
+import CardNav from '../../components/card-nav/card-nav';
+import FilmButtons from '../../components/film-buttons/film-buttons';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import { PromoCardType } from '../../mocks/mocks';
 
 type MovieReviewsProps ={
   movie: PromoCardType,
@@ -151,7 +151,7 @@ function MovieReviews({movie, catalogFilms} :MovieReviewsProps):JSX.Element {
                 key={film.title}
                 film={film}
                 isActive={film.id === activeFilmId}
-                onHover={setActiveFilmId}
+                onCardHover={setActiveFilmId}
               />
             ))}
           </div>

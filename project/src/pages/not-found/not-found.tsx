@@ -1,5 +1,5 @@
-import Footer from '../components/footer/footer';
-import HeaderSignIn from '../components/header-sign-in/header-sign-in';
+import Footer from '../../components/footer/footer';
+import HeaderSignIn from '../../components/header-sign-in/header-sign-in';
 import {Link} from 'react-router-dom';
 import styles from './not-found.module.css';
 

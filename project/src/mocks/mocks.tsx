@@ -326,4 +326,6 @@ const films: PromoCardType[] = [
   },
 ];
 
-export {Genres,  PromoBudapest, films };
+const MAXSCORE = 10;
+
+export {Genres,  PromoBudapest, films, MAXSCORE };

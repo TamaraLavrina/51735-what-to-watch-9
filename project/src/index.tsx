@@ -7,8 +7,8 @@ import { films } from './mocks/mocks';
 ReactDOM.render(
   <React.StrictMode>
     <App
-      PromoCard = {films[0]}
-      CatalogFilms = {films}
+      PromoCard ={films[0]}
+      CatalogFilms ={films}
     />
   </React.StrictMode>,
   document.getElementById('root'));

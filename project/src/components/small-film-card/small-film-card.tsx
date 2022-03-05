@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 type SmallFilmCardProps = {
   film: PromoCardType,
   isActive: boolean,
-  onHover: (id: number | null) => void,
+  onCardHover: (id: number | null) => void,
 };
 
-function SmallFilmCard({ film, isActive, onHover }: SmallFilmCardProps): JSX.Element{
+function SmallFilmCard({ film, isActive, onCardHover: onHover }: SmallFilmCardProps): JSX.Element{
   return (
     <article className="small-film-card catalog__films-card"
       onMouseEnter={() => onHover(film.id)}
