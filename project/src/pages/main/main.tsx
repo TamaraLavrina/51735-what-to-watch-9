@@ -1,8 +1,8 @@
-import Catalog from '../components/catalog/catalog';
-import FilmCardPromo from '../components/film-card-promo/film-card-promo';
-import Footer from '../components/footer/footer';
-import Header from '../components/header/header';
-import { PromoCardType } from '../mocks/mocks';
+import Catalog from '../../components/catalog/catalog';
+import FilmCardPromo from '../../components/film-card-promo/film-card-promo';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import { PromoCardType } from '../../mocks/mocks';
 
 type MainScreenProps = {
   filmPromoCard: PromoCardType,
@@ -16,16 +16,17 @@ function Main({filmPromoCard, catalogFilms}: MainScreenProps): JSX.Element {
         <div className="film-card__bg">
           <img src={filmPromoCard.backgroundImg} alt={filmPromoCard.title} />
         </div>
+
         <h1 className="visually-hidden">WTW</h1>
 
         <Header />
-        <FilmCardPromo Promofilm = {filmPromoCard}/>
 
+        <FilmCardPromo promofilm={filmPromoCard}/>
       </section>
 
       <div className="page-content">
+        <Catalog filmsList={catalogFilms}/>
 
-        <Catalog filmsList = {catalogFilms}/>
         <Footer />
 
       </div>

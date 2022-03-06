@@ -21,7 +21,7 @@ function Catalog({filmsList}: CatalogProps): JSX.Element {
             key={film.id}
             film={film}
             isActive={film.id === activeFilmId}
-            onHover={setActiveFilmId}
+            onCardHover={setActiveFilmId}
           />
         ))}
       </div>

@@ -1,10 +1,10 @@
 import {useState} from 'react';
-import CardNav from '../components/card-nav/card-nav';
-import FilmButtons from '../components/film-buttons/film-buttons';
-import Footer from '../components/footer/footer';
-import Header from '../components/header/header';
-import SmallFilmCard from '../components/small-film-card/small-film-card';
-import { PromoCardType } from '../mocks/mocks';
+import CardNav from '../../components/card-nav/card-nav';
+import FilmButtons from '../../components/film-buttons/film-buttons';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import { PromoCardType } from '../../mocks/mocks';
 
 type MovieReviewsProps ={
   movie: PromoCardType,
@@ -18,7 +18,7 @@ function MovieReviews({movie, catalogFilms} :MovieReviewsProps):JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={movie.backgroundImg} alt={movie.title} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -27,13 +27,13 @@ function MovieReviews({movie, catalogFilms} :MovieReviewsProps):JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{movie.title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{movie.genre}</span>
+                <span className="film-card__year">{movie.releaseDate}</span>
               </p>
 
-              <FilmButtons />
+              <FilmButtons currentFilm={movie}/>
 
             </div>
           </div>
@@ -42,7 +42,7 @@ function MovieReviews({movie, catalogFilms} :MovieReviewsProps):JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={movie.poster} alt={movie.title} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -151,7 +151,7 @@ function MovieReviews({movie, catalogFilms} :MovieReviewsProps):JSX.Element {
                 key={film.title}
                 film={film}
                 isActive={film.id === activeFilmId}
-                onHover={setActiveFilmId}
+                onCardHover={setActiveFilmId}
               />
             ))}
           </div>

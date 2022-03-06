@@ -1,6 +1,6 @@
-import Footer from '../components/footer/footer';
-import Logo from '../components/logo/logo';
-import SignIn from '../components/sign-in/sign-in';
+import Footer from '../../components/footer/footer';
+import Logo from '../../components/logo/logo';
+import SignIn from '../../components/sign-in/sign-in';
 
 function LogIn():JSX.Element {
   return(
