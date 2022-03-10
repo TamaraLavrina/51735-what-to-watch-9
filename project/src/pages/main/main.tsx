@@ -21,11 +21,11 @@ function Main({filmPromoCard, catalogFilms}: MainScreenProps): JSX.Element {
 
         <Header />
 
-        <FilmCardPromo promofilm={filmPromoCard}/>
+        <FilmCardPromo promofilm={filmPromoCard} />
       </section>
 
       <div className="page-content">
-        <Catalog filmsList={catalogFilms}/>
+        <Catalog filmsList={catalogFilms} />
 
         <Footer />
 

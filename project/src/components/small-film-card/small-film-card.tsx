@@ -1,5 +1,6 @@
 import { PromoCardType } from  '../../mocks/mocks';
 import { Link } from 'react-router-dom';
+import VideoPlayer from '../video-player/video-player';
 
 type SmallFilmCardProps = {
   film: PromoCardType,
@@ -8,17 +9,29 @@ type SmallFilmCardProps = {
 };
 
 function SmallFilmCard({ film, isActive, onCardHover: onHover }: SmallFilmCardProps): JSX.Element{
+  let playTimer: NodeJS.Timeout;
+
   return (
-    <article className="small-film-card catalog__films-card"
-      onMouseEnter={() => onHover(film.id)}
-      onMouseLeave={() => onHover(null)}
+    <article
+      onMouseEnter={
+        () => {
+          playTimer = setTimeout(() => {
+            onHover(film.id);
+          }, 1000);
+        }
+      }
+      onMouseLeave={
+        () => {
+          clearTimeout(playTimer);
+          onHover(0);
+        }
+      }
+      className="small-film-card catalog__films-card"
     >
       <div className="small-film-card__image">
-        <img
-          src={film.previewImg}
-          alt={film.title}
-          width="280"
-          height="175"
+        <VideoPlayer
+          film={film}
+          isPlaying={isActive}
         />
       </div>
       <h3 className="small-film-card__title">
