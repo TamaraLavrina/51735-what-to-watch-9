@@ -2,11 +2,11 @@ import Catalog from '../../components/catalog/catalog';
 import FilmCardPromo from '../../components/film-card-promo/film-card-promo';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { PromoCardType } from '../../mocks/mocks';
+import { CardType } from '../../mocks/mocks';
 
 type MainScreenProps = {
-  filmPromoCard: PromoCardType,
-  catalogFilms: PromoCardType[],
+  filmPromoCard: CardType,
+  catalogFilms: CardType[],
 };
 
 function Main({filmPromoCard, catalogFilms}: MainScreenProps): JSX.Element {

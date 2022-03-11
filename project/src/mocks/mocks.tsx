@@ -120,26 +120,31 @@ const PromoBudapest = {
 };
 
 export type PromoCardType = {
-  backgroundColor?: string,
-  backgroundImg?: string
-  description?: string,
-  director?: string,
-  duration?: number,
-  genre?: string,
   id: number,
-  isInMyList?: boolean,
-  movieLink?: string,
-  poster?: string,
-  previewImg?: string,
-  previewVideoLink?: string,
-  rating?: number,
-  releaseDate?: number,
-  scores?: number,
-  starring?: string[],
   title: string,
 }
 
-const films: PromoCardType[] = [
+export type CardType = {
+  backgroundColor: string,
+  backgroundImg: string
+  description: string,
+  director: string,
+  duration: number,
+  genre: string,
+  id: number,
+  isInMyList: boolean,
+  movieLink: string,
+  poster: string,
+  previewImg: string,
+  previewVideoLink: string,
+  rating: number,
+  releaseDate: number,
+  scores: number,
+  starring: string[],
+  title: string,
+}
+
+const films: CardType[] = [
   {
     backgroundColor: '#f0dba2',
     backgroundImg: 'https://9.react.pages.academy/static/film/background/Johnny_English.jpg',
@@ -326,6 +331,19 @@ const films: PromoCardType[] = [
   },
 ];
 
-const MAXSCORE = 10;
+export type Review = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: {
+    id: number;
+    name: string;
+  };
+};
 
-export {Genres,  PromoBudapest, films, MAXSCORE };
+const MAXSCORE = 10;
+const DELAY = 1000;
+const FILMS_MAX_COUNT = 4;
+
+export {Genres,  PromoBudapest, films, MAXSCORE, DELAY, FILMS_MAX_COUNT };

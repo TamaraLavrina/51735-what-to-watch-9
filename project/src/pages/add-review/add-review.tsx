@@ -1,13 +1,12 @@
-import { useParams } from 'react-router-dom';
-import { PromoCardType } from '../../mocks/mocks';
+import { useParams, Navigate } from 'react-router-dom';
+import { CardType } from '../../mocks/mocks';
 import Breadcrumbs from '../../components/breadcrumps/breadcrumps';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import NotFound from '../../pages/not-found/not-found';
 import ReviewForm from '../../components/review-form/review-form';
 
 type AddReviewProps = {
-  catalogFilms: PromoCardType[],
+  catalogFilms: CardType[],
 }
 
 
@@ -15,7 +14,7 @@ function AddReview({catalogFilms}:AddReviewProps):JSX.Element {
   const { id } = useParams<{ id: string }>();
   const film = catalogFilms.find((item) => item.id === Number(id));
   if (!film) {
-    return <NotFound />;
+    return <Navigate to="/" />;
   }
 
 

@@ -1,9 +1,9 @@
-import { PromoCardType } from '../../mocks/mocks';
+import { CardType } from '../../mocks/mocks';
 import FilmButtons from '../film-buttons/film-buttons';
 
 type FilmCardPromoProps = {
   className?: string;
-  promofilm: PromoCardType,
+  promofilm: CardType,
 }
 
 function FilmCardPromo({promofilm: Promofilm, className=''}: FilmCardPromoProps): JSX.Element {

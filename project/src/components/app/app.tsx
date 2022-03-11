@@ -6,13 +6,13 @@ import LogIn from '../../pages/log-in/log-in';
 import MyList from '../../pages/my-list/my-list';
 import Player from '../../pages/player/player';
 import AddReview from '../../pages/add-review/add-review';
-import { PromoCardType } from '../../mocks/mocks';
+import { CardType } from '../../mocks/mocks';
 import PrivateRoute from '../private-route/private-route';
 import NotFound from '../../pages/not-found/not-found';
 
 type AppProps = {
-  PromoCard: PromoCardType,
-  CatalogFilms: PromoCardType[],
+  PromoCard: CardType,
+  CatalogFilms: CardType[],
 };
 
 function App({ PromoCard, CatalogFilms }: AppProps): JSX.Element {

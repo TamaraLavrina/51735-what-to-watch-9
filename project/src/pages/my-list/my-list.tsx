@@ -1,18 +1,15 @@
-import {useState} from 'react';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import UserBlock from '../../components/user-block/user-block';
-import { PromoCardType } from '../../mocks/mocks';
+import { CardType } from '../../mocks/mocks';
 
 type MyListProps = {
-  catalogFilms: PromoCardType[],
+  catalogFilms: CardType[],
 }
 
 
 function MyList({catalogFilms}: MyListProps): JSX.Element {
-  const [activeFilmId, setActiveFilmId] = useState<number | null>(null);
-
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -31,8 +28,6 @@ function MyList({catalogFilms}: MyListProps): JSX.Element {
             <SmallFilmCard
               key={film.id}
               film={film}
-              isActive={film.id === activeFilmId}
-              onCardHover={setActiveFilmId}
             />
           ))}
         </div>
