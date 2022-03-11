@@ -1,15 +1,35 @@
+import { Link /*useLocation*/ } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { AppRoute } from '../../const/const';
+
 function CardNav():JSX.Element {
+  const { id } = useParams();
+  // const { pathname } = useLocation();
   return(
     <nav className="film-nav film-card__nav">
       <ul className="film-nav__list">
-        <li className="film-nav__item">
-          <a href="/#" className="film-nav__link">Overview</a>
-        </li>
         <li className="film-nav__item film-nav__item--active">
-          <a href="/#" className="film-nav__link">Details</a>
+          <Link
+            to={`${AppRoute.Movie}/${id}/overview`}
+            className="film-nav__link"
+          >
+            Overview
+          </Link>
+        </li>
+        <li className="film-nav__item ">
+          <Link
+            to={`${AppRoute.Movie}/${id}/overview`}
+            className={'film-nav__link'}
+          >
+            Details
+          </Link>
         </li>
         <li className="film-nav__item">
-          <a href="/#" className="film-nav__link">Reviews</a>
+          <Link
+            to={`${AppRoute.Movie}/${id}/reviews`}
+            className="film-nav__link"
+          >Reviews
+          </Link>
         </li>
       </ul>
     </nav>

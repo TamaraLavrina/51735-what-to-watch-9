@@ -1,24 +1,35 @@
-import { PromoCardType } from  '../../mocks/mocks';
+import { DELAY, CardType } from  '../../mocks/mocks';
+import {useRef, useState} from 'react';
 import { Link } from 'react-router-dom';
+import VideoPlayer from '../video-player/video-player';
 
 type SmallFilmCardProps = {
-  film: PromoCardType,
-  isActive: boolean,
-  onCardHover: (id: number | null) => void,
+  film: CardType,
 };
 
-function SmallFilmCard({ film, isActive, onCardHover: onHover }: SmallFilmCardProps): JSX.Element{
+function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element{
+  const [isActive, setActive] = useState(false);
+  const timerId = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   return (
-    <article className="small-film-card catalog__films-card"
-      onMouseEnter={() => onHover(film.id)}
-      onMouseLeave={() => onHover(null)}
+    <article
+      onMouseEnter={() => {
+        timerId.current = setTimeout(() => {
+          setActive(true);
+        }, DELAY);
+      }}
+      onMouseLeave={() => {
+        if (timerId.current) {
+          clearTimeout(timerId.current);
+          setActive(false);
+        }
+      }}
+      className="small-film-card catalog__films-card"
     >
       <div className="small-film-card__image">
-        <img
-          src={film.previewImg}
-          alt={film.title}
-          width="280"
-          height="175"
+        <VideoPlayer
+          film={film}
+          isPlaying={isActive}
         />
       </div>
       <h3 className="small-film-card__title">

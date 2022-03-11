@@ -1,27 +1,22 @@
-import { useParams } from 'react-router-dom';
-// import {MouseEvent} from 'react';
-import {useState} from 'react';
+import { useParams, Navigate } from 'react-router-dom';
 import CardNav from '../../components/card-nav/card-nav';
 import FilmButtons from '../../components/film-buttons/film-buttons';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { PromoCardType} from '../../mocks/mocks';
-import NotFound from '../../pages/not-found/not-found';
+import { CardType} from '../../mocks/mocks';
 
 type MovieProps = {
-  catalogFilms: PromoCardType[],
+  catalogFilms: CardType[],
 }
 
 function Movie({catalogFilms}:MovieProps): JSX.Element {
-  const params = useParams();
-  const currentFilm = catalogFilms.find((film) => film.id === Number(params.id));
-  const [activeFilmId, setActiveFilmId] = useState<number | null>(null);
+  const { id } = useParams();
+  const currentFilm = catalogFilms.find((film) => film.id === Number(id));
 
   if (!currentFilm) {
-    return <NotFound />;
+    return <Navigate to="/" />;
   }
-
 
   return (
     <>
@@ -56,19 +51,6 @@ function Movie({catalogFilms}:MovieProps): JSX.Element {
             <div className="film-card__desc">
               <CardNav />
 
-              <div className="film-rating">
-                <div className="film-rating__score">{currentFilm.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{currentFilm.scores} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{currentFilm.description}</p>
-                <p className="film-card__director"><strong>Director: {currentFilm.director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {currentFilm.starring}</strong></p>
-              </div>
             </div>
           </div>
         </div>
@@ -81,8 +63,6 @@ function Movie({catalogFilms}:MovieProps): JSX.Element {
               <SmallFilmCard
                 key={film.id}
                 film={film}
-                isActive={film.id === activeFilmId}
-                onCardHover={setActiveFilmId}
               />
             ))}
           </div>
