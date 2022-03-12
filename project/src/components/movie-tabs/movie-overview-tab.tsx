@@ -1,32 +1,48 @@
-import {  CardType } from  '../../mocks/mocks';
-import { Navigate } from 'react-router-dom';
-
+import { CardType } from '../../mocks/mocks';
 
 type OverviewTabProps = {
   movie: CardType;
+};
+
+function getTextRating(raiting: number) {
+  if (0 <= raiting && raiting < 3) {
+    return 'Bad';
+  }
+  if (3 <= raiting && raiting < 5) {
+    return 'Normal';
+  }
+  if (5 <= raiting && raiting < 8) {
+    return 'Good';
+  }
+  if (8 <= raiting && raiting < 10) {
+    return 'Very good';
+  }
+  if (raiting === 10) {
+    return 'Awesome';
+  }
 }
 
-function OverviewTab({movie}: OverviewTabProps):JSX.Element {
-
-  if (!movie) {
-    return <Navigate to="/" />;
-  }
-
-  return(
+function OverviewTab({ movie }: OverviewTabProps): JSX.Element {
+  const { rating, scores, director, description, starring } = movie;
+  return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">8,9</div>
+        <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">Very good</span>
-          <span className="film-rating__count">{movie.scores} ratings</span>
+          <span className="film-rating__level">{getTextRating(rating)}</span>
+          <span className="film-rating__count">{scores} ratings</span>
         </p>
       </div>
 
       <div className="film-card__text">
-        {movie.description}
-        <p className="film-card__director"><strong>Director: {movie.director}</strong></p>
+        {description}
+        <p className="film-card__director">
+          <strong>Director: {director}</strong>
+        </p>
 
-        <p className="film-card__starring"><strong>Starring: {movie.starring.join(', ')} and other</strong></p>
+        <p className="film-card__starring">
+          <strong>Starring: {starring.join(', ')} and other</strong>
+        </p>
       </div>
     </>
   );

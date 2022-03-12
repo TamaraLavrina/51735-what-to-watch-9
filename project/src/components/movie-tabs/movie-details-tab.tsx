@@ -1,18 +1,11 @@
-import {  CardType } from  '../../mocks/mocks';
-import { Navigate } from 'react-router-dom';
-
+import { CardType } from '../../mocks/mocks';
 
 type DetailsTabProps = {
   movie: CardType;
-}
+};
 
-function DetailsTab({movie}: DetailsTabProps):JSX.Element {
-
-  if (!movie) {
-    return <Navigate to="/" />;
-  }
-
-  return(
+function DetailsTab({ movie }: DetailsTabProps): JSX.Element {
+  return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
@@ -22,7 +15,7 @@ function DetailsTab({movie}: DetailsTabProps):JSX.Element {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {movie.starring.join(`', '${<br />}`)}
+            {movie.starring.join(`', '${(<br />)}`)}
           </span>
         </p>
       </div>
