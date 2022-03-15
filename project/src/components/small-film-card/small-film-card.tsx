@@ -1,15 +1,22 @@
-import { DELAY, CardType } from  '../../mocks/mocks';
-import {useRef, useState} from 'react';
+import { DELAY, CardType } from '../../mocks/mocks';
+import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 
 type SmallFilmCardProps = {
-  film: CardType,
+  film: CardType;
 };
 
-function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element{
+function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element {
   const [isActive, setActive] = useState(false);
   const timerId = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (timerId.current) {
+      clearTimeout(timerId.current);
+      setActive(false);
+    }
+  }, [timerId]);
 
   return (
     <article
@@ -27,10 +34,7 @@ function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element{
       className="small-film-card catalog__films-card"
     >
       <div className="small-film-card__image">
-        <VideoPlayer
-          film={film}
-          isPlaying={isActive}
-        />
+        <VideoPlayer film={film} isPlaying={isActive} />
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${film.id}`}>

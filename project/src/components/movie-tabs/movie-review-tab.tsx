@@ -1,17 +1,12 @@
 import {  CardType } from  '../../mocks/mocks';
-import { Navigate } from 'react-router-dom';
 
 type ReviewTabTabProps = {
   movie: CardType;
 }
 
-function OverviewTab({movie}: ReviewTabTabProps):JSX.Element {
-
-  if (!movie) {
-    return <Navigate to="/" />;
-  }
-
-  return(
+function ReviewTab({movie}: ReviewTabTabProps):JSX.Element {
+  // const { id } = movie;
+  return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         <div className="review">
@@ -97,4 +92,4 @@ function OverviewTab({movie}: ReviewTabTabProps):JSX.Element {
   );
 }
 
-export default OverviewTab;
+export default ReviewTab;
