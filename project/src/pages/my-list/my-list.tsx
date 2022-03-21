@@ -2,7 +2,7 @@ import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import UserBlock from '../../components/user-block/user-block';
-import { CardType } from '../../mocks/mocks';
+import { CardType } from '../../types/types';
 
 type MyListProps = {
   catalogFilms: CardType[],

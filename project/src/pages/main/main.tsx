@@ -2,14 +2,13 @@ import Catalog from '../../components/catalog/catalog';
 import FilmCardPromo from '../../components/film-card-promo/film-card-promo';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { CardType } from '../../mocks/mocks';
+import { CardType } from '../../types/types';
 
 type MainScreenProps = {
-  filmPromoCard: CardType,
-  catalogFilms: CardType[],
+  filmPromoCard: CardType;
 };
 
-function Main({filmPromoCard, catalogFilms}: MainScreenProps): JSX.Element {
+function Main({ filmPromoCard }: MainScreenProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -25,10 +24,9 @@ function Main({filmPromoCard, catalogFilms}: MainScreenProps): JSX.Element {
       </section>
 
       <div className="page-content">
-        <Catalog filmsList={catalogFilms} />
+        <Catalog />
 
         <Footer />
-
       </div>
     </>
   );

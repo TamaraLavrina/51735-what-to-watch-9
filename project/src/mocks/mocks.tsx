@@ -1,15 +1,3 @@
-enum Genres {
-  'All genres',
-  'Comedies',
-  'Documentary',
-  'Dramas',
-  'Horror',
-  'Kids & Family',
-  'Romance',
-  'Sci-Fi',
-  'Thrillers',
-}
-
 const PromoBudapest = {
   poster: 'the-grand-budapest-hotel-poster.jpg',
   title: 'The Grand Budapest Hotel',
@@ -17,32 +5,8 @@ const PromoBudapest = {
   releaseDate: 2014,
 };
 
-export type PromoCardType = {
-  id: number;
-  title: string;
-};
 
-export type CardType = {
-  backgroundColor: string;
-  backgroundImg: string;
-  description: string;
-  director: string;
-  duration: number;
-  genre: string;
-  id: number;
-  isInMyList: boolean;
-  movieLink: string;
-  poster: string;
-  previewImg: string;
-  previewVideoLink: string;
-  rating: number;
-  releaseDate: number;
-  scores: number;
-  starring: string[];
-  title: string;
-};
-
-const films: CardType[] = [
+const films = [
   {
     backgroundColor: '#f0dba2',
     backgroundImg:
@@ -238,9 +202,5 @@ export type Review = {
   };
 };
 
-const MAXSCORE = 10;
-const DELAY = 1000;
-const FILMS_MAX_COUNT = 4;
-const TABS = ['Overview', 'Details', 'Reviews'];
 
-export { Genres, PromoBudapest, films, MAXSCORE, DELAY, FILMS_MAX_COUNT, TABS };
+export { PromoBudapest, films};

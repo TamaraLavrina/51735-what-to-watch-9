@@ -1,4 +1,4 @@
-import { CardType } from '../../mocks/mocks';
+import { CardType }  from '../../types/types';
 
 type OverviewTabProps = {
   movie: CardType;

@@ -1,4 +1,5 @@
-import { DELAY, CardType } from '../../mocks/mocks';
+import { DELAY } from '../../const/const';
+import { CardType } from '../../types/types';
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
@@ -11,7 +12,7 @@ function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element {
   const [isActive, setActive] = useState(false);
   const timerId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => () => {
+  useEffect(() => {
     if (timerId.current) {
       clearTimeout(timerId.current);
       setActive(false);

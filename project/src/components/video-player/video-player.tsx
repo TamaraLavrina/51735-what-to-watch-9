@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { CardType } from  '../../mocks/mocks';
+import { CardType } from '../../types/types';
 
 
 type PlayerProps = {

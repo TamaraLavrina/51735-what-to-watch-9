@@ -1,5 +1,5 @@
 import { ChangeEvent, Fragment, useState } from 'react';
-import { MAXSCORE } from '../../mocks/mocks';
+import { MAXSCORE } from '../../const/const';
 
 function ReviewForm() :JSX.Element {
   const [comment, setComment] = useState('');
