@@ -24,7 +24,7 @@ function GenresList(): JSX.Element {
             key={genre}
           >
             <a href="/#" className="catalog__genres-link"
-              onClick={(evt: { currentTarget:  HTMLElement }) => {
+              onClick={() => {
                 dispatch(changeGenre(genre));
               }}
             >
