@@ -6,7 +6,7 @@ import LogIn from '../../pages/log-in/log-in';
 import MyList from '../../pages/my-list/my-list';
 import Player from '../../pages/player/player';
 import AddReview from '../../pages/add-review/add-review';
-import { CardType } from '../../mocks/mocks';
+import { CardType } from '../../types/types';
 import PrivateRoute from '../private-route/private-route';
 import NotFound from '../../pages/not-found/not-found';
 
@@ -19,7 +19,7 @@ function App({ PromoCard, CatalogFilms }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Route} element={<Main filmPromoCard ={PromoCard} catalogFilms={CatalogFilms}/>}/>
+        <Route path={AppRoute.Route} element={<Main filmPromoCard ={PromoCard} />}/>
         <Route path={AppRoute.Movie} element={<Movie catalogFilms={CatalogFilms}/>}/>
         <Route path={AppRoute.MyList} element={
           <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>

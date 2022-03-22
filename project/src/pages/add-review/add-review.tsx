@@ -1,5 +1,5 @@
 import { useParams, Navigate } from 'react-router-dom';
-import { CardType } from '../../mocks/mocks';
+import { CardType } from '../../types/types';
 import Breadcrumbs from '../../components/breadcrumps/breadcrumps';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PromoCardType } from '../../mocks/mocks';
+import { PromoCardType } from '../../types/types';
 
 type FilmButtonsProps ={
   currentFilm: PromoCardType,

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { CardType, TABS } from '../../mocks/mocks';
+import { CardType } from '../../types/types';
+import { TABS } from '../../const/const';
 import OverviewTab from '../movie-tabs/movie-overview-tab';
 import DetailsTab from '../movie-tabs/movie-details-tab';
 import ReviewTab from '../movie-tabs/movie-review-tab';

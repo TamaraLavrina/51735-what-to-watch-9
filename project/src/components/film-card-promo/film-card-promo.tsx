@@ -1,4 +1,4 @@
-import { CardType } from '../../mocks/mocks';
+import { CardType } from '../../types/types';
 import FilmButtons from '../film-buttons/film-buttons';
 
 type FilmCardPromoProps = {

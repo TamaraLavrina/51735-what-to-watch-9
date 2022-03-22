@@ -4,7 +4,7 @@ import FilmButtons from '../../components/film-buttons/film-buttons';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { CardType } from '../../mocks/mocks';
+import { CardType } from '../../types/types';
 
 type MovieProps = {
   catalogFilms: CardType[];
