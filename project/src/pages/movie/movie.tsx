@@ -66,15 +66,15 @@ function Movie({ catalogFilms }: MovieProps): JSX.Element {
         </div>
       </section>
       <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-          <div className="catalog__films-list">
-            {similarFilms.map((film) => (
-              <SmallFilmCard key={film.id} film={film} />
-            ))}
-          </div>
-        </section>
-
+        {similarFilms.length > 0 && (
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+            <div className="catalog__films-list">
+              {similarFilms.map((film) => (
+                <SmallFilmCard key={film.id} film={film} />
+              ))}
+            </div>
+          </section>)}
         <Footer />
       </div>
     </>

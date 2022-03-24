@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { changeGenre } from '../../store/action';
-import { DEFAULT_ACTIVE_GENRE } from '../../const/const';
+import { DEFAULT_ACTIVE_GENRE, GENRES_MAX_COUNT } from '../../const/const';
 import cn from 'classnames';
 
 
 function GenresList(): JSX.Element {
-  const filmsState = useAppSelector((state) => state.films);
-  const filmsGenres = Array.from(new Set(filmsState.map((film) => film.genre)));
+  const films = useAppSelector((state) => state.films);
+  const filmsGenres = Array.from(new Set(films.map((film) => film.genre)));
   filmsGenres.push(DEFAULT_ACTIVE_GENRE);
   const activeGenre = useAppSelector((state) => state.activeGenre);
   const dispatch = useAppDispatch();
@@ -15,6 +15,7 @@ function GenresList(): JSX.Element {
     <ul className="catalog__genres-list">
 
       {filmsGenres
+        .slice(0,GENRES_MAX_COUNT )
         .reverse()
         .map((genre) => (
           <li
@@ -24,7 +25,8 @@ function GenresList(): JSX.Element {
             key={genre}
           >
             <a href="/#" className="catalog__genres-link"
-              onClick={() => {
+              onClick={(evt) => {
+                evt.preventDefault();
                 dispatch(changeGenre(genre));
               }}
             >

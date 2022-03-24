@@ -5,7 +5,7 @@ const changeGenre = createAction('changeGenre', (value: string) => ({
 }));
 
 const getListFilms = createAction('getListFilms');
-const resetState = createAction('resetState');
-const showMoreFilms = createAction('showMoreFilms');
+const resetFilmsCount = createAction('resetState');
+const increaseFilmsCount = createAction('showMoreFilms');
 
-export { changeGenre, getListFilms,  resetState, showMoreFilms};
+export { changeGenre, getListFilms,  resetFilmsCount, increaseFilmsCount};

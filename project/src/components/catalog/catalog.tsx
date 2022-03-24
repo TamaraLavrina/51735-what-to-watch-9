@@ -2,22 +2,22 @@ import GenresList from '../genre-list/genre-list';
 import { useAppSelector } from '../../hooks/';
 import SmallFilmCard from '../small-film-card/small-film-card';
 import ShowMoreButton from '../show-more-button/show-more-button';
-
+import { DEFAULT_ACTIVE_GENRE } from '../../const/const';
 
 function Catalog(): JSX.Element {
-  const filmsState = useAppSelector((state) => state.films);
-  const activeGenreState = useAppSelector((state) => state.activeGenre);
-  const shownFilmsState = useAppSelector((state) => state.quantityFilms);
+  const films = useAppSelector((state) => state.films);
+  const activeGenre = useAppSelector((state) => state.activeGenre);
+  const shownFilms = useAppSelector((state) => state.shownFilmsCount);
 
-  const sortedFilms =
-    activeGenreState === 'All genres'
-      ? filmsState
-      : filmsState.filter((film) => film.genre === activeGenreState);
+  const filteredFilms =
+    activeGenre === DEFAULT_ACTIVE_GENRE
+      ? films
+      : films.filter((film) => film.genre === activeGenre);
 
-  const sortedShownFilms =
-    shownFilmsState > sortedFilms.length
-      ? sortedFilms
-      : sortedFilms.slice(0, shownFilmsState);
+  const filteredShownFilms =
+    shownFilms > filteredFilms.length
+      ? filteredFilms
+      : filteredFilms.slice(0, shownFilms);
 
   return (
     <section className="catalog">
@@ -25,13 +25,14 @@ function Catalog(): JSX.Element {
 
       <GenresList />
       <div className="catalog__films-list">
-        {sortedShownFilms.map((film) => (
-          <SmallFilmCard  key={film.id}  film={film} />
+        {filteredShownFilms.map((film) => (
+          <SmallFilmCard key={film.id} film={film} />
         ))}
       </div>
 
-      {!(shownFilmsState >= sortedFilms.length) && <ShowMoreButton/>}
-    </section>);
+      {!(shownFilms >= filteredFilms.length) && <ShowMoreButton />}
+    </section>
+  );
 }
 
 export default Catalog;

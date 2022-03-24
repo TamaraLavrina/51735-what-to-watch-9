@@ -1,5 +1,5 @@
 import { ChangeEvent, Fragment, useState } from 'react';
-import { MAXSCORE } from '../../const/const';
+import { MAX_SCORE } from '../../const/const';
 
 function ReviewForm() :JSX.Element {
   const [comment, setComment] = useState('');
@@ -13,7 +13,7 @@ function ReviewForm() :JSX.Element {
     setRating(Number(evt.target.value));
   };
 
-  const ratingStars = new Array(MAXSCORE)
+  const ratingStars = new Array(MAX_SCORE)
     .fill(null)
     .map((value, index) => (index + 1))
     .reverse();
