@@ -30,7 +30,7 @@ function Catalog(): JSX.Element {
         ))}
       </div>
 
-      {!(shownFilms >= filteredFilms.length) && <ShowMoreButton />}
+      {(shownFilms < filteredFilms.length) && <ShowMoreButton />}
     </section>
   );
 }

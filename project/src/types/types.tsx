@@ -1,9 +1,9 @@
-export type PromoCardType = {
+type PromoCardType = {
   id: number;
   title: string;
 };
 
-export type CardType = {
+type CardType = {
   backgroundColor: string;
   backgroundImg: string;
   description: string;
@@ -22,3 +22,16 @@ export type CardType = {
   starring: string[];
   title: string;
 };
+
+type AuthData = {
+  login: string;
+  password: string;
+};
+
+type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};
+
+export type { AuthData, PromoCardType, CardType, UserData };

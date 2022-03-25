@@ -12,26 +12,32 @@ function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element {
   const [isActive, setActive] = useState(false);
   const timerId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
+  useEffect(() => () => {
     if (timerId.current) {
       clearTimeout(timerId.current);
       setActive(false);
     }
-  }, [timerId]);
+  },
+  [timerId],
+  );
+
+  const handlePlay = () => {
+    timerId.current = setTimeout(() => {
+      setActive(true);
+    }, DELAY);
+  };
+
+  const handleStop = () => {
+    if (timerId.current) {
+      clearTimeout(timerId.current);
+      setActive(false);
+    }
+  };
 
   return (
     <article
-      onMouseEnter={() => {
-        timerId.current = setTimeout(() => {
-          setActive(true);
-        }, DELAY);
-      }}
-      onMouseLeave={() => {
-        if (timerId.current) {
-          clearTimeout(timerId.current);
-          setActive(false);
-        }
-      }}
+      onMouseEnter={handlePlay}
+      onMouseLeave={handleStop}
       className="small-film-card catalog__films-card"
     >
       <div className="small-film-card__image">
