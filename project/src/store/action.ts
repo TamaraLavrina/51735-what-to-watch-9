@@ -1,11 +1,17 @@
-import {createAction} from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
+import { CardType } from '../types/types';
+import {AuthorizationStatus} from '../const/const';
 
 const changeGenre = createAction('changeGenre', (value: string) => ({
   payload: value,
 }));
 
-const getListFilms = createAction('getListFilms');
-const resetState = createAction('resetState');
-const showMoreFilms = createAction('showMoreFilms');
+const getListFilms = createAction('getListFilms', (value:CardType[])  => ({
+  payload: value,
+}));
 
-export { changeGenre, getListFilms,  resetState, showMoreFilms};
+const resetFilmsCount = createAction('resetState');
+const increaseFilmsCount = createAction('showMoreFilms');
+const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');
+
+export { changeGenre, getListFilms, resetFilmsCount, increaseFilmsCount, requireAuthorization };
