@@ -20,13 +20,13 @@ function VideoPlayer({isPlaying, film}: PlayerProps) {
     } else {
       videoRef.current.load();
     }
-  }, [isPlaying, film.previewImg]);
+  }, [isPlaying, film.previewImage]);
 
   return (
     <video
       ref={videoRef}
       src={film.previewVideoLink}
-      poster={film.previewImg}
+      poster={film.previewImage}
       width="100%"
       height="100%"
       muted

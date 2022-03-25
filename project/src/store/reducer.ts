@@ -4,30 +4,36 @@ import {
   getListFilms,
   resetFilmsCount,
   increaseFilmsCount,
-  requireAuthorization
+  requireAuthorization,
+  getFavoriteFilms
 } from './action';
 
 import {
   DEFAULT_ACTIVE_GENRE,
   FILM_COUNT,
-  AuthorizationStatus
+  AuthorizationStatusName
 } from '../const/const';
 import { CardType } from '../types/types';
-import { films } from '../mocks/mocks';
+
 
 type initialStateType = {
   activeGenre: string;
   films: CardType[];
   shownFilmsCount: number;
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus: AuthorizationStatusName;
+  favoriteFilms: CardType[];
+  error: string,
+  isDataLoaded: boolean,
 };
 
 const initialState: initialStateType = {
   activeGenre: DEFAULT_ACTIVE_GENRE,
-  films:films,
-  // films: [],
+  films: [],
   shownFilmsCount: FILM_COUNT,
-  authorizationStatus: AuthorizationStatus.Unknown,
+  authorizationStatus: AuthorizationStatusName.Unknown,
+  favoriteFilms:[],
+  error: '',
+  isDataLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -40,6 +46,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.activeGenre = DEFAULT_ACTIVE_GENRE;
       state.films = action.payload;
       state.shownFilmsCount = FILM_COUNT;
+      state.isDataLoaded = true;
     })
     .addCase(resetFilmsCount, (state) => {
       state.activeGenre = DEFAULT_ACTIVE_GENRE;
@@ -50,6 +57,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(getFavoriteFilms, (state, action) => {
+      state.favoriteFilms = action.payload;
     });
 });
 

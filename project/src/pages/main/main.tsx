@@ -13,7 +13,7 @@ function Main({ filmPromoCard }: MainScreenProps): JSX.Element {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={filmPromoCard.backgroundImg} alt={filmPromoCard.title} />
+          <img src={filmPromoCard.backgroundImage} alt={filmPromoCard.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>

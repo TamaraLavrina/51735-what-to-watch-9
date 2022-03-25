@@ -8,7 +8,7 @@ enum AppRoute {
   NotFound = '/404',
 }
 
-enum AuthorizationStatus {
+enum AuthorizationStatusName {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
@@ -19,8 +19,9 @@ const MAX_SCORE = 10;
 const DELAY = 1000;
 const FILMS_MAX_COUNT = 4;
 const TABS = ['Overview', 'Details', 'Reviews'];
-const FILM_COUNT = 4;
+const FILM_COUNT = 8;
 const GENRES_MAX_COUNT = 9;
+const TIMEOUT_SHOW_ERROR = 2000;
 
 enum APIRoute {
   Films = '/films',
@@ -31,9 +32,15 @@ enum APIRoute {
   Logout = '/logout',
 }
 
+enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
+}
+
 export {
   AppRoute,
-  AuthorizationStatus,
+  AuthorizationStatusName,
   DEFAULT_ACTIVE_GENRE,
   MAX_SCORE,
   DELAY,
@@ -41,5 +48,7 @@ export {
   TABS,
   FILM_COUNT,
   GENRES_MAX_COUNT,
-  APIRoute
+  HTTP_CODE,
+  APIRoute,
+  TIMEOUT_SHOW_ERROR
 };
