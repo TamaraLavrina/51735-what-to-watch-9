@@ -23,14 +23,14 @@ function getTextRating(raiting: number) {
 }
 
 function OverviewTab({ movie }: OverviewTabProps): JSX.Element {
-  const { rating, scores, director, description, starring } = movie;
+  const { rating, scoresCount, director, description, starring } = movie;
   return (
     <>
       <div className="film-rating">
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{getTextRating(rating)}</span>
-          <span className="film-rating__count">{scores} ratings</span>
+          <span className="film-rating__count">{scoresCount} ratings</span>
         </p>
       </div>
 

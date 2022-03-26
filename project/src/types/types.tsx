@@ -1,26 +1,26 @@
 type PromoCardType = {
   id: number;
-  title: string;
+  name: string;
 };
 
 type CardType = {
   backgroundColor: string;
-  backgroundImg: string;
+  backgroundImage: string;
   description: string;
   director: string;
-  duration: number;
+  runTime: number;
   genre: string;
   id: number;
-  isInMyList: boolean;
+  isFavorite: boolean;
   movieLink: string;
-  poster: string;
-  previewImg: string;
+  posterImage: string;
+  previewImage: string;
   previewVideoLink: string;
   rating: number;
-  releaseDate: number;
-  scores: number;
+  released: number;
+  scoresCount: number;
   starring: string[];
-  title: string;
+  name: string;
 };
 
 type AuthData = {

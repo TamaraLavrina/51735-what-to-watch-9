@@ -28,18 +28,18 @@ function Movie({ catalogFilms }: MovieProps): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={currentFilm.backgroundImg} alt={currentFilm.title} />
+            <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
           </div>
 
           <Header />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{currentFilm.title}</h2>
+              <h2 className="film-card__title">{currentFilm.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{currentFilm.genre}</span>
                 <span className="film-card__year">
-                  {currentFilm.releaseDate}
+                  {currentFilm.released}
                 </span>
               </p>
 
@@ -52,8 +52,8 @@ function Movie({ catalogFilms }: MovieProps): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src={currentFilm.poster}
-                alt={currentFilm.title}
+                src={currentFilm.posterImage}
+                alt={currentFilm.name}
                 width="218"
                 height="327"
               />

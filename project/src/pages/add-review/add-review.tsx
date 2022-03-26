@@ -22,7 +22,7 @@ function AddReview({catalogFilms}:AddReviewProps):JSX.Element {
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film.backgroundImg} alt={film.title} />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -36,7 +36,7 @@ function AddReview({catalogFilms}:AddReviewProps):JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={film.previewImg} alt={film.title} width="218" height="327" />
+          <img src={film.previewImage} alt={film.name} width="218" height="327" />
         </div>
       </div>
 
