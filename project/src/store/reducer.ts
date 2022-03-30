@@ -1,11 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { PromoBudapest } from '../mocks/mocks';
 import {
   changeGenre,
   getListFilms,
   resetFilmsCount,
   increaseFilmsCount,
   requireAuthorization,
-  getFavoriteFilms
+  getFavoriteFilms,
+  getPromoFilm
 } from './action';
 
 import {
@@ -19,20 +21,20 @@ import { CardType } from '../types/types';
 type initialStateType = {
   activeGenre: string;
   films: CardType[];
+  promoFilm: CardType;
   shownFilmsCount: number;
   authorizationStatus: AuthorizationStatusName;
   favoriteFilms: CardType[];
-  error: string,
   isDataLoaded: boolean,
 };
 
 const initialState: initialStateType = {
   activeGenre: DEFAULT_ACTIVE_GENRE,
+  promoFilm: PromoBudapest,
   films: [],
   shownFilmsCount: FILM_COUNT,
   authorizationStatus: AuthorizationStatusName.Unknown,
   favoriteFilms:[],
-  error: '',
   isDataLoaded: false,
 };
 
@@ -57,6 +59,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(getPromoFilm, (state, action) => {
+      state.promoFilm = action.payload;
     })
     .addCase(getFavoriteFilms, (state, action) => {
       state.favoriteFilms = action.payload;

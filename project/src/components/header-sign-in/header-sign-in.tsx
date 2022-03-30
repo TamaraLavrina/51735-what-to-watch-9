@@ -1,4 +1,5 @@
 import Logo from '../logo/logo';
+import { Link } from 'react-router-dom';
 
 function HeaderSignIn():JSX.Element {
   return (
@@ -13,7 +14,7 @@ function HeaderSignIn():JSX.Element {
         <Logo/>
 
         <div className="user-block">
-          <a href="sign-in.html" className="user-block__link">Sign in</a>
+          <Link to="login" className="user-block__link">Sign in</Link>
         </div>
       </header>
 

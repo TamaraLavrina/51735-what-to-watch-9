@@ -21,7 +21,13 @@ const FILMS_MAX_COUNT = 4;
 const TABS = ['Overview', 'Details', 'Reviews'];
 const FILM_COUNT = 8;
 const GENRES_MAX_COUNT = 9;
-const TIMEOUT_SHOW_ERROR = 2000;
+
+enum LOADING_STATUS {
+  Idle = 'IDLE',
+  Loading = 'LOADING',
+  Succeeded = 'SUCCEEDED',
+  Failed = 'FAILED',
+}
 
 enum APIRoute {
   Films = '/films',
@@ -32,10 +38,10 @@ enum APIRoute {
   Logout = '/logout',
 }
 
-enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+enum HttpCode {
+  BadRequest = 400,
+  Unauthorized= 401,
+  NotFound = 404,
 }
 
 export {
@@ -48,7 +54,7 @@ export {
   TABS,
   FILM_COUNT,
   GENRES_MAX_COUNT,
-  HTTP_CODE,
+  HttpCode,
   APIRoute,
-  TIMEOUT_SHOW_ERROR
+  LOADING_STATUS
 };

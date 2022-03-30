@@ -25,7 +25,7 @@ function Movie({ catalogFilms }: MovieProps): JSX.Element {
 
   return (
     <>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{backgroundColor: currentFilm.backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
