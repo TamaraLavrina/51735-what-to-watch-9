@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { PromoCardType } from '../../types/types';
+import { CardType } from '../../types/types';
 
 type FilmButtonsProps ={
-  currentFilm: PromoCardType,
+  currentFilm: CardType,
 }
 
 function FilmButtons({currentFilm}: FilmButtonsProps): JSX.Element {

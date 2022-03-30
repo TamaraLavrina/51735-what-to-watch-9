@@ -1,6 +1,7 @@
 import { DELAY } from '../../const/const';
 import { CardType } from '../../types/types';
 import { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 
@@ -11,6 +12,7 @@ type SmallFilmCardProps = {
 function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element {
   const [isActive, setActive] = useState(false);
   const timerId = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => () => {
     if (timerId.current) {
@@ -38,6 +40,7 @@ function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element {
     <article
       onMouseEnter={handlePlay}
       onMouseLeave={handleStop}
+      onClick={() => navigate(`/films/${film.id}`)}
       className="small-film-card catalog__films-card"
     >
       <div className="small-film-card__image">

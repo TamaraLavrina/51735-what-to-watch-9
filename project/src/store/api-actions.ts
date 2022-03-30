@@ -1,20 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../store';
 import { store } from '../store';
-import { getListFilms, requireAuthorization, setError } from './action';
+import {
+  getListFilms,
+  requireAuthorization,
+  getPromoFilm,
+  redirectToRoute
+} from './action';
 import { saveToken, dropToken } from '../services/token';
 import {
   APIRoute,
   AuthorizationStatusName,
-  TIMEOUT_SHOW_ERROR
+  AppRoute
 } from '../const/const';
 import { CardType } from '../types/types';
 import { AuthData, UserData } from '../types/types';
 import errorHandle from '../services/error-handle';
-
-const clearErrorAction = createAsyncThunk('data/clearError', () => {
-  setTimeout(() => store.dispatch(setError('')), TIMEOUT_SHOW_ERROR);
-});
 
 const fetchFilmsAction = createAsyncThunk('data/fetchFilms', async () => {
   try {
@@ -43,7 +44,9 @@ const loginAction = createAsyncThunk(
         data: { token },
       } = await api.post<UserData>(APIRoute.Login, { email, password });
       saveToken(token);
+      // console.log(token);
       store.dispatch(requireAuthorization(AuthorizationStatusName.Auth));
+      store.dispatch(redirectToRoute(AppRoute.MyList));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatusName.NoAuth));
@@ -66,11 +69,16 @@ const fetchFavoriteFilms = createAsyncThunk('data/fetchFilms', async () => {
   store.dispatch(getListFilms(data));
 });
 
+const fetchPromoFilm = createAsyncThunk('data/fetchPromoFilm', async () => {
+  const { data } = await api.get<CardType>(APIRoute.Promo);
+  store.dispatch(getPromoFilm(data));
+});
+
 export {
   fetchFavoriteFilms,
   logoutAction,
   fetchFilmsAction,
   loginAction,
   checkAuthAction,
-  clearErrorAction
+  fetchPromoFilm
 };

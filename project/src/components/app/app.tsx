@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatusName } from '../../const/const';
 import Main from '../../pages/main/main';
@@ -8,8 +8,10 @@ import MyList from '../../pages/my-list/my-list';
 import Player from '../../pages/player/player';
 import AddReview from '../../pages/add-review/add-review';
 import NotFound from '../../pages/not-found/not-found';
-import LoadingScreen from '../loading-screen/loading-screen';
+import Loader from '../loader/loader';
 import PrivateRoute from '../private-route/private-route';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 
 const isCheckedAuth = (authorizationStatus: AuthorizationStatusName): boolean =>
@@ -17,19 +19,23 @@ const isCheckedAuth = (authorizationStatus: AuthorizationStatusName): boolean =>
 
 function App(): JSX.Element {
   const catalogFilms = useAppSelector((state) => state.films);
+  const PromoCard = useAppSelector((state) => state.promoFilm);
   const { authorizationStatus, isDataLoaded } = useAppSelector(
     (state) => state,
   );
 
+
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
-    return <LoadingScreen />;
+    return <Loader />;
   }
+
+
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Route}
-          element={<Main filmPromoCard={catalogFilms[0]} />}
+          element={<Main filmPromoCard={PromoCard} />}
         />
         <Route
           path={AppRoute.Movie}
@@ -51,7 +57,7 @@ function App(): JSX.Element {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

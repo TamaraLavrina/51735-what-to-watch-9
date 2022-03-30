@@ -1,8 +1,3 @@
-type PromoCardType = {
-  id: number;
-  name: string;
-};
-
 type CardType = {
   backgroundColor: string;
   backgroundImage: string;
@@ -12,7 +7,7 @@ type CardType = {
   genre: string;
   id: number;
   isFavorite: boolean;
-  movieLink: string;
+  videoLink: string;
   posterImage: string;
   previewImage: string;
   previewVideoLink: string;
@@ -34,4 +29,15 @@ type UserData = {
   token: string;
 };
 
-export type { AuthData, PromoCardType, CardType, UserData };
+ type Review = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: {
+    id: number;
+    name: string;
+  };
+};
+
+export type { AuthData, CardType, UserData, Review };

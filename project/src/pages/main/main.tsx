@@ -2,7 +2,7 @@ import Catalog from '../../components/catalog/catalog';
 import FilmCardPromo from '../../components/film-card-promo/film-card-promo';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { CardType } from '../../types/types';
+import {  CardType } from '../../types/types';
 
 type MainScreenProps = {
   filmPromoCard: CardType;
