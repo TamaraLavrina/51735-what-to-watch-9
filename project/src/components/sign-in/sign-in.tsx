@@ -63,7 +63,7 @@ function SignIn(): JSX.Element {
     dispatch(loginAction(authData));
   };
 
-  const isValid = Object.values(formState).some(({ error }) => error === true);
+  const isValid = Object.values(formState).some(({ error }) => error);
 
   return (
     <div className="sign-in user-page__content">
@@ -96,7 +96,6 @@ function SignIn(): JSX.Element {
             className="sign-in__btn"
             type="submit"
             disabled={isValid}
-            // onClick={() => navigate(AppRoute.MyList)}
           >
             Sign in
           </button>

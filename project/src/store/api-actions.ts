@@ -44,7 +44,6 @@ const loginAction = createAsyncThunk(
         data: { token },
       } = await api.post<UserData>(APIRoute.Login, { email, password });
       saveToken(token);
-      // console.log(token);
       store.dispatch(requireAuthorization(AuthorizationStatusName.Auth));
       store.dispatch(redirectToRoute(AppRoute.MyList));
     } catch (error) {
