@@ -25,7 +25,7 @@ function MovieNavTabs({ movie, reviews }: MovieNavTabsProps): JSX.Element {
       case 'Details':
         return <DetailsTab movie={movie} />;
       case 'Reviews':
-        return <ReviewTab movie={movie} reviews={reviews}/>;
+        return <ReviewTab  reviews={reviews}/>;
       default:
         throw new Error(`Unknown tab type ${activeTab}`);
     }

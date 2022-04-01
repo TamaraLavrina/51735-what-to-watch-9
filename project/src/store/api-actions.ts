@@ -104,7 +104,7 @@ const fetchCommentsAction = createAsyncThunk(
   });
 
 const fetchSimilarFilmsAction = createAsyncThunk(
-  'data/fetchComments', async (id: number) => {
+  'data/fetchSimilarFilmsAction', async (id: number) => {
     try{
       const { data } = await api.get<CardType[]>(`${APIRoute.Films}/${id}/similar`);
       store.dispatch(fetchSimilarFilms(data));

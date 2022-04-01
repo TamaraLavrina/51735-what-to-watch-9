@@ -7,7 +7,7 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import { store } from '../../store';
-import { fetchCurrentFilmAction, fetchCommentsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction } from '../../store/api-actions';
 
 
 function Movie(): JSX.Element {
@@ -15,15 +15,14 @@ function Movie(): JSX.Element {
 
   useEffect(() => {
     store.dispatch(fetchCurrentFilmAction(Number(id)));
-    store.dispatch(fetchCommentsAction(Number(id)));
     store.dispatch(fetchSimilarFilmsAction(Number(id)));
+    store.dispatch(fetchCommentsAction(Number(id)));
   },[id]);
 
   const currentFilm = useAppSelector((state) => state.currentFilm);
   const similarFetchedFilms = useAppSelector((state) => state.similarFilms);
   const similarFilms = similarFetchedFilms.slice(0, 4);
   const reviews = useAppSelector((state) => state.comments);
-
 
   if (!currentFilm) {
     return <Navigate to="/" />;
@@ -65,7 +64,7 @@ function Movie(): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <MovieNavTabs reviews={reviews} movie={currentFilm} />
+              <MovieNavTabs movie={currentFilm} reviews={reviews} />
             </div>
           </div>
         </div>
