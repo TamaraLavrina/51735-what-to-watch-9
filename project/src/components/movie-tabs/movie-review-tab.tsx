@@ -1,10 +1,11 @@
-import {  CardType } from '../../types/types';
+import {  CardType, Review } from '../../types/types';
 
 type ReviewTabTabProps = {
   movie: CardType;
+  reviews: Review[];
 }
 
-function ReviewTab({movie}: ReviewTabTabProps):JSX.Element {
+function ReviewTab({movie, reviews}: ReviewTabTabProps):JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">

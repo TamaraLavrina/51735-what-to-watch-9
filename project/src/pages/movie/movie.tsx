@@ -1,28 +1,33 @@
 import { useParams, Navigate } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
 import MovieNavTabs from '../../components/movie-nav-tabs/movie-nav-tabs';
 import FilmButtons from '../../components/film-buttons/film-buttons';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { CardType } from '../../types/types';
+import { store } from '../../store';
+import { fetchCurrentFilmAction, fetchCommentsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 
-type MovieProps = {
-  catalogFilms: CardType[];
-};
 
-function Movie({ catalogFilms }: MovieProps): JSX.Element {
+function Movie(): JSX.Element {
   const { id } = useParams();
-  const currentFilm = catalogFilms.find((film) => film.id === Number(id));
+
+  useEffect(() => {
+    store.dispatch(fetchCurrentFilmAction(Number(id)));
+    store.dispatch(fetchCommentsAction(Number(id)));
+    store.dispatch(fetchSimilarFilmsAction(Number(id)));
+  },[id]);
+
+  const currentFilm = useAppSelector((state) => state.currentFilm);
+  const similarFetchedFilms = useAppSelector((state) => state.similarFilms);
+  const similarFilms = similarFetchedFilms.slice(0, 4);
+  const reviews = useAppSelector((state) => state.comments);
+
 
   if (!currentFilm) {
     return <Navigate to="/" />;
   }
-  const similarFilms = catalogFilms
-    .filter(
-      (film) => film.genre === currentFilm?.genre && film.id !== currentFilm.id,
-    )
-    .slice(0, 4);
-
   return (
     <>
       <section className="film-card film-card--full" style={{backgroundColor: currentFilm.backgroundColor}}>
@@ -60,7 +65,7 @@ function Movie({ catalogFilms }: MovieProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <MovieNavTabs movie={currentFilm} />
+              <MovieNavTabs reviews={reviews} movie={currentFilm} />
             </div>
           </div>
         </div>

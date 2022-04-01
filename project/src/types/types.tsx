@@ -29,7 +29,7 @@ type UserData = {
   token: string;
 };
 
- type Review = {
+type Review = {
   comment: string;
   date: string;
   id: number;
@@ -40,4 +40,18 @@ type UserData = {
   };
 };
 
-export type { AuthData, CardType, UserData, Review };
+type CommentPost = {
+  id: number,
+  comment: string,
+  rating: number,
+}
+
+type UserLoginDataType = {
+  avatarUrl: string,
+  email: string,
+  id: number,
+  name: string,
+  token: string,
+};
+
+export type { AuthData, CardType, UserData, Review, CommentPost, UserLoginDataType };

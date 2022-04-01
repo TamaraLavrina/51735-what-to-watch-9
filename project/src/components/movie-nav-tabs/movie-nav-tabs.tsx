@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardType } from '../../types/types';
+import { CardType, Review } from '../../types/types';
 import { TABS } from '../../const/const';
 import OverviewTab from '../movie-tabs/movie-overview-tab';
 import DetailsTab from '../movie-tabs/movie-details-tab';
@@ -8,9 +8,10 @@ import cn from 'classnames';
 
 type MovieNavTabsProps = {
   movie: CardType;
+  reviews: Review[];
 };
 
-function MovieNavTabs({ movie }: MovieNavTabsProps): JSX.Element {
+function MovieNavTabs({ movie, reviews }: MovieNavTabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState<string>(TABS[0]);
 
   const handleClick = (tab: string) => {
@@ -24,7 +25,7 @@ function MovieNavTabs({ movie }: MovieNavTabsProps): JSX.Element {
       case 'Details':
         return <DetailsTab movie={movie} />;
       case 'Reviews':
-        return <ReviewTab movie={movie} />;
+        return <ReviewTab movie={movie} reviews={reviews}/>;
       default:
         throw new Error(`Unknown tab type ${activeTab}`);
     }

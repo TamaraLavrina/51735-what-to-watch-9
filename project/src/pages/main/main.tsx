@@ -1,15 +1,20 @@
+import {Navigate } from 'react-router-dom';
 import Catalog from '../../components/catalog/catalog';
 import FilmCardPromo from '../../components/film-card-promo/film-card-promo';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import { AppRoute } from '../../const/const';
 import {  CardType } from '../../types/types';
+
 
 type MainScreenProps = {
   filmPromoCard: CardType;
 };
 
 function Main({ filmPromoCard }: MainScreenProps): JSX.Element {
-  return (
+  if (!filmPromoCard) {
+    <Navigate to={AppRoute.NotFound} />;
+  } return (
     <>
       <section className="film-card">
         <div className="film-card__bg">

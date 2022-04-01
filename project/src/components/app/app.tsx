@@ -39,7 +39,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Movie}
-          element={<Movie catalogFilms={catalogFilms} />}
+          element={<Movie />}
         />
         <Route
           path={AppRoute.MyList}

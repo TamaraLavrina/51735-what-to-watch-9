@@ -69,27 +69,31 @@ function SignIn(): JSX.Element {
     <div className="sign-in user-page__content">
       <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
         {Object.entries(formFields).map(([name, label]) => (
-          <div className="sign-in__fields" key={name}>
-            {formState[name].error && <p>{formState[name].errorText}</p>}
-            <div
-              className={cn('sign-in__field', {
-                'sign-in__field--error': formState[name].error,
-              })}
-            >
-              <input
-                className="sign-in__input"
-                type={name}
-                placeholder={label}
-                name={name}
-                id={name}
-                value={formState[name].value}
-                onChange={handleChange}
-              />
-              <label className="sign-in__label visually-hidden" htmlFor={name}>
-                {label}
-              </label>
+          <>
+            <div className="sign-in__message" key={name}>
+              {formState[name].error && <p>{formState[name].errorText}</p>}
             </div>
-          </div>
+            <div className="sign-in__fields" >
+              <div
+                className={cn('sign-in__field', {
+                  'sign-in__field--error': formState[name].error,
+                })}
+              >
+                <input
+                  className="sign-in__input"
+                  type={name}
+                  placeholder={label}
+                  name={name}
+                  id={name}
+                  value={formState[name].value}
+                  onChange={handleChange}
+                />
+                <label className="sign-in__label visually-hidden" htmlFor={name}>
+                  {label}
+                </label>
+              </div>
+            </div>
+          </>
         ))}
         <div className="sign-in__submit">
           <button
