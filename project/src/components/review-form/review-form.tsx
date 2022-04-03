@@ -1,16 +1,26 @@
 import { ChangeEvent, Fragment, useState } from 'react';
+import { FormEvent } from 'react';
+import { store } from '../../store';
 import { MAX_SCORE } from '../../const/const';
+import { CardType } from '../../types/types';
+import { postNewComment } from '../../store/api-actions';
 
-function ReviewForm() :JSX.Element {
-  const [comment, setComment] = useState('');
-  const [rating, setRating] = useState<number>(0);
+
+type ReviewFormProps = {
+  film: CardType,
+}
+
+function ReviewForm({film} :ReviewFormProps) :JSX.Element {
+
+  const [commentState, setCommentState] = useState('');
+  const [ratingState, setRatingState] = useState<number>(0);
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(evt.target.value);
+    setCommentState(evt.target.value);
   };
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setRating(Number(evt.target.value));
+    setRatingState(Number(evt.target.value));
   };
 
   const ratingStars = new Array(MAX_SCORE)
@@ -18,8 +28,18 @@ function ReviewForm() :JSX.Element {
     .map((value, index) => (index + 1))
     .reverse();
 
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const id = film.id;
+    const comment = {
+      comment: commentState,
+      rating: ratingState,
+    };
+    store.dispatch(postNewComment({id, comment}));
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={handleSubmit}>
       <div className="rating">
         <div className="rating__stars">
 
@@ -30,7 +50,7 @@ function ReviewForm() :JSX.Element {
                 type="radio"
                 name="rating"
                 value={value}
-                checked ={rating === value}
+                checked ={ratingState === value}
                 onChange ={handleRatingChange}
               />
               <label
@@ -43,14 +63,18 @@ function ReviewForm() :JSX.Element {
         </div>
       </div>
 
-      <div className="add-review__text">
+      <div className="add-review__text"
+        style={{backgroundColor: film.backgroundColor}}
+      >
         <textarea
           className="add-review__textarea"
           name="review-text"
           id="review-text"
           placeholder="Review text"
-          value={comment}
+          value={commentState}
           onChange={handleCommentChange}
+          minLength={50}
+          maxLength={400}
         >
         </textarea>
         <div className="add-review__submit">

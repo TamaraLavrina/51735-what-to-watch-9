@@ -19,7 +19,7 @@ function AddReview({catalogFilms}:AddReviewProps):JSX.Element {
 
 
   return (
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full" style={{backgroundColor: film.backgroundColor}}>
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={film.backgroundImage} alt={film.name} />
@@ -41,7 +41,7 @@ function AddReview({catalogFilms}:AddReviewProps):JSX.Element {
       </div>
 
       <div className="add-review">
-        <ReviewForm />
+        <ReviewForm film={film}/>
 
       </div>
     </section>

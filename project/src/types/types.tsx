@@ -42,8 +42,10 @@ type Review = {
 
 type CommentPost = {
   id: number,
-  comment: string,
-  rating: number,
+  comment: {
+    comment: string,
+    rating: number,
+  }
 }
 
 type UserLoginDataType = {
@@ -54,4 +56,10 @@ type UserLoginDataType = {
   token: string,
 };
 
-export type { AuthData, CardType, UserData, Review, CommentPost, UserLoginDataType };
+type isFavoriteStatus = {
+  filmId: number;
+  status: number;
+};
+
+
+export type { AuthData, CardType, UserData, Review, CommentPost, UserLoginDataType, isFavoriteStatus };

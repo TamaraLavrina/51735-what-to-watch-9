@@ -7,7 +7,7 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import { store } from '../../store';
-import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction } from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction, fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 
 function Movie(): JSX.Element {
@@ -17,6 +17,7 @@ function Movie(): JSX.Element {
     store.dispatch(fetchCurrentFilmAction(Number(id)));
     store.dispatch(fetchSimilarFilmsAction(Number(id)));
     store.dispatch(fetchCommentsAction(Number(id)));
+    store.dispatch(fetchFavoriteFilmsAction());
   },[id]);
 
   const currentFilm = useAppSelector((state) => state.currentFilm);

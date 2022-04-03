@@ -73,8 +73,10 @@ const initialState: initialStateType = {
   films: [],
   userComment: {
     id: 0,
-    comment: '',
-    rating: 0,
+    comment: {
+      comment: '',
+      rating: 0,
+    },
   },
   userLoginData: {
     avatarUrl: '',
@@ -128,6 +130,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchSimilarFilms, (state, action) => {
       state.similarFilms = action.payload;
     });
+  // .addCase(updateFavoriteList, (state, action) => {
+  //   state.favoriteFilms = action.payload;
+  // });
 });
 
 export { reducer };

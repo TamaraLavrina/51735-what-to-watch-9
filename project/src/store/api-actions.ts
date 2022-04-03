@@ -8,7 +8,8 @@ import {
   redirectToRoute,
   fetchComments,
   fetchCurrentFilm,
-  fetchSimilarFilms
+  fetchSimilarFilms,
+  fetchFavoriteFilms
 } from './action';
 import { saveToken, dropToken } from '../services/token';
 import {
@@ -16,8 +17,8 @@ import {
   AuthorizationStatusName,
   AppRoute
 } from '../const/const';
-import { CardType, Review } from '../types/types';
-import { AuthData, UserData } from '../types/types';
+import { CardType, Review,  AuthData, UserData, isFavoriteStatus, CommentPost } from '../types/types';
+
 import errorHandle from '../services/error-handle';
 
 const fetchFilmsAction = createAsyncThunk('data/fetchFilms', async () => {
@@ -69,7 +70,7 @@ const logoutAction = createAsyncThunk('user/logout', async () => {
 const fetchFavoriteFilmsAction = createAsyncThunk('data/fetchFilms', async () => {
   try {
     const { data } = await api.get<CardType[]>(APIRoute.Favorite);
-    store.dispatch(fetchListFilms(data));
+    store.dispatch(fetchFavoriteFilms(data));
   }catch (error) {
     errorHandle(error);
   }
@@ -113,6 +114,31 @@ const fetchSimilarFilmsAction = createAsyncThunk(
     }
   });
 
+const changeIsFavoriteStatusAction = createAsyncThunk(
+  'changeIsFavoriteStatusAction',
+  async ({ filmId, status}: isFavoriteStatus) => {
+    try {
+      await api.post<isFavoriteStatus>(`/favorite/${filmId}/${status}`);
+      store.dispatch(fetchCurrentFilmAction(filmId));
+    } catch(error) {
+      errorHandle(error);
+    }
+  },
+);
+
+const postNewComment = createAsyncThunk(
+  'postNewComment',
+  async ({ id, comment}: CommentPost) => {
+    try {
+      await api.post<CommentPost>(`comments/${id}`, comment);
+      store.dispatch(fetchCurrentFilmAction(id));
+      // store.dispatch(redirectToRoute(`${AppRoute.Movie}${id}`));
+      store.dispatch(redirectToRoute(AppRoute.Route));
+    } catch(error) {
+      errorHandle(error);
+    }
+  },
+);
 
 export {
   fetchFavoriteFilmsAction,
@@ -123,5 +149,7 @@ export {
   fetchCurrentFilmAction,
   fetchPromoFilmAction,
   fetchCommentsAction,
-  fetchSimilarFilmsAction
+  fetchSimilarFilmsAction,
+  changeIsFavoriteStatusAction,
+  postNewComment
 };

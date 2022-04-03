@@ -57,6 +57,12 @@ const requireAuthorization = createAction<AuthorizationStatusName>(
   'requireAuthorization',
 );
 const redirectToRoute = createAction<AppRoute>('redirectToRoute');
+const changeIsFavoriteStatus = createAction(
+  'changeIsFavoriteStatus',
+  (value: CardType) => ({
+    payload: value,
+  }),
+);
 
 export {
   changeGenre,
@@ -69,5 +75,6 @@ export {
   redirectToRoute,
   fetchCurrentFilm,
   fetchComments,
-  fetchSimilarFilms
+  fetchSimilarFilms,
+  changeIsFavoriteStatus
 };
