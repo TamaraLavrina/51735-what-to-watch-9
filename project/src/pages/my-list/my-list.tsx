@@ -2,14 +2,20 @@ import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import UserBlock from '../../components/user-block/user-block';
-import { CardType } from '../../types/types';
-
-type MyListProps = {
-  catalogFilms: CardType[],
-}
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import {  fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 
-function MyList({catalogFilms}: MyListProps): JSX.Element {
+function MyList(): JSX.Element {
+  const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+  },[]);
+
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -24,7 +30,7 @@ function MyList({catalogFilms}: MyListProps): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          {catalogFilms.slice(2, 6).map((film) => (
+          {favoriteFilms.map((film) => (
             <SmallFilmCard
               key={film.id}
               film={film}

@@ -2,10 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../store';
 import { store } from '../store';
 import {
-  getListFilms,
+  fetchListFilms,
   requireAuthorization,
-  getPromoFilm,
-  redirectToRoute
+  fetchPromoFilm,
+  redirectToRoute,
+  fetchComments,
+  fetchCurrentFilm,
+  fetchSimilarFilms,
+  fetchFavoriteFilms
 } from './action';
 import { saveToken, dropToken } from '../services/token';
 import {
@@ -13,14 +17,14 @@ import {
   AuthorizationStatusName,
   AppRoute
 } from '../const/const';
-import { CardType } from '../types/types';
-import { AuthData, UserData } from '../types/types';
+import { CardType, Review,  AuthData, UserData, isFavoriteStatus, CommentPost } from '../types/types';
+
 import errorHandle from '../services/error-handle';
 
 const fetchFilmsAction = createAsyncThunk('data/fetchFilms', async () => {
   try {
     const { data } = await api.get<CardType[]>(APIRoute.Films);
-    store.dispatch(getListFilms(data));
+    store.dispatch(fetchListFilms(data));
   } catch (error) {
     errorHandle(error);
   }
@@ -63,21 +67,88 @@ const logoutAction = createAsyncThunk('user/logout', async () => {
   }
 });
 
-const fetchFavoriteFilms = createAsyncThunk('data/fetchFilms', async () => {
-  const { data } = await api.get<CardType[]>(APIRoute.Favorite);
-  store.dispatch(getListFilms(data));
+const fetchFavoriteFilmsAction = createAsyncThunk('data/fetchFilms', async () => {
+  try {
+    const { data } = await api.get<CardType[]>(APIRoute.Favorite);
+    store.dispatch(fetchFavoriteFilms(data));
+  }catch (error) {
+    errorHandle(error);
+  }
 });
 
-const fetchPromoFilm = createAsyncThunk('data/fetchPromoFilm', async () => {
-  const { data } = await api.get<CardType>(APIRoute.Promo);
-  store.dispatch(getPromoFilm(data));
+const fetchPromoFilmAction = createAsyncThunk('data/fetchPromoFilm', async () => {
+  try{
+    const { data } = await api.get<CardType>(APIRoute.Promo);
+    store.dispatch(fetchPromoFilm(data));
+  }catch (error) {
+    errorHandle(error);
+  }
 });
+
+const fetchCurrentFilmAction = createAsyncThunk('data/fetchCurrentFilm', async (id: number) => {
+  try{
+    const { data } = await api.get<CardType>(`${APIRoute.Films}/${id}`);
+    store.dispatch(fetchCurrentFilm(data));
+  }catch (error) {
+    errorHandle(error);
+  }
+});
+
+const fetchCommentsAction = createAsyncThunk(
+  'data/fetchComments', async (id: number) => {
+    try{
+      const { data } = await api.get<Review[]>(`${APIRoute.Comments}/${id}`);
+      store.dispatch(fetchComments(data));
+    }catch (error) {
+      errorHandle(error);
+    }
+  });
+
+const fetchSimilarFilmsAction = createAsyncThunk(
+  'data/fetchSimilarFilmsAction', async (id: number) => {
+    try{
+      const { data } = await api.get<CardType[]>(`${APIRoute.Films}/${id}/similar`);
+      store.dispatch(fetchSimilarFilms(data));
+    }catch (error) {
+      errorHandle(error);
+    }
+  });
+
+const changeIsFavoriteStatusAction = createAsyncThunk(
+  'changeIsFavoriteStatusAction',
+  async ({ filmId, status}: isFavoriteStatus) => {
+    try {
+      await api.post<isFavoriteStatus>(`/favorite/${filmId}/${status}`);
+      store.dispatch(fetchCurrentFilmAction(filmId));
+    } catch(error) {
+      errorHandle(error);
+    }
+  },
+);
+
+const postNewComment = createAsyncThunk(
+  'postNewComment',
+  async ({ filmId, comment}: CommentPost) => {
+    try {
+      await api.post<CommentPost>(`comments/${filmId}`, comment);
+      store.dispatch(fetchCurrentFilmAction(filmId));
+      store.dispatch(redirectToRoute(`/films/${filmId}`));
+    } catch(error) {
+      errorHandle(error);
+    }
+  },
+);
 
 export {
-  fetchFavoriteFilms,
+  fetchFavoriteFilmsAction,
   logoutAction,
   fetchFilmsAction,
   loginAction,
   checkAuthAction,
-  fetchPromoFilm
+  fetchCurrentFilmAction,
+  fetchPromoFilmAction,
+  fetchCommentsAction,
+  fetchSimilarFilmsAction,
+  changeIsFavoriteStatusAction,
+  postNewComment
 };

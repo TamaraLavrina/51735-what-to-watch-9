@@ -1,28 +1,34 @@
-import { useParams, Navigate } from 'react-router-dom';
-import { CardType } from '../../types/types';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import Breadcrumbs from '../../components/breadcrumps/breadcrumps';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
-
-type AddReviewProps = {
-  catalogFilms: CardType[],
-}
+import ErrorLoader from '../../components/loader/error-loader';
+import { fetchCurrentFilmAction } from '../../store/api-actions';
 
 
-function AddReview({catalogFilms}:AddReviewProps):JSX.Element {
-  const { id } = useParams<{ id: string }>();
-  const film = catalogFilms.find((item) => item.id === Number(id));
-  if (!film) {
-    return <Navigate to="/" />;
+function AddReview():JSX.Element {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+
+  const currentFilm = useAppSelector((state) => state.currentFilm);
+
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(Number(id)));
+  },[id]);
+
+
+  if (!currentFilm) {
+    return <ErrorLoader />;
   }
 
-
   return (
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full" style={{backgroundColor: currentFilm.backgroundColor}}>
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film.backgroundImage} alt={film.name} />
+          <img src={currentFilm.backgroundImage} alt={currentFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -30,13 +36,13 @@ function AddReview({catalogFilms}:AddReviewProps):JSX.Element {
         <header className="page-header">
 
           <Logo />
-          <Breadcrumbs currentFilm={film} />
+          <Breadcrumbs currentFilm={currentFilm} />
           <UserBlock />
 
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={film.previewImage} alt={film.name} width="218" height="327" />
+          <img src={currentFilm.previewImage} alt={currentFilm.name} width="218" height="327" />
         </div>
       </div>
 

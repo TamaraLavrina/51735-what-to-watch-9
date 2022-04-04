@@ -1,27 +1,40 @@
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
 import MovieNavTabs from '../../components/movie-nav-tabs/movie-nav-tabs';
 import FilmButtons from '../../components/film-buttons/film-buttons';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { CardType } from '../../types/types';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction } from '../../store/api-actions';
+import ErrorLoader from '../../components/loader/error-loader';
+import Loader from '../../components/loader/loader';
 
-type MovieProps = {
-  catalogFilms: CardType[];
-};
 
-function Movie({ catalogFilms }: MovieProps): JSX.Element {
+function Movie(): JSX.Element {
   const { id } = useParams();
-  const currentFilm = catalogFilms.find((film) => film.id === Number(id));
+  const dispatch = useAppDispatch();
+
+  const currentFilm = useAppSelector((state) => state.currentFilm);
+  const similarFetchedFilms = useAppSelector((state) => state.similarFilms);
+  const similarFilms = similarFetchedFilms.slice(0, 4);
+  const reviews = useAppSelector((state) => state.comments);
+
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(Number(id)));
+    dispatch(fetchSimilarFilmsAction(Number(id)));
+    dispatch(fetchCommentsAction(Number(id)));
+  },[id, dispatch]);
+
 
   if (!currentFilm) {
-    return <Navigate to="/" />;
+    return <Loader />;
   }
-  const similarFilms = catalogFilms
-    .filter(
-      (film) => film.genre === currentFilm?.genre && film.id !== currentFilm.id,
-    )
-    .slice(0, 4);
+
+  if (currentFilm === null){
+    return <ErrorLoader />;
+  }
+
 
   return (
     <>
@@ -60,7 +73,7 @@ function Movie({ catalogFilms }: MovieProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <MovieNavTabs movie={currentFilm} />
+              <MovieNavTabs movie={currentFilm} reviews={reviews} />
             </div>
           </div>
         </div>

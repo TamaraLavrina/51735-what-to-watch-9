@@ -1,41 +1,46 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { PromoBudapest } from '../mocks/mocks';
+import { DEFAULT_ACTIVE_GENRE, FILM_COUNT, AuthorizationStatusName } from '../const/const';
+import { CardType,  Review } from '../types/types';
 import {
   changeGenre,
-  getListFilms,
+  fetchListFilms,
   resetFilmsCount,
   increaseFilmsCount,
   requireAuthorization,
-  getFavoriteFilms,
-  getPromoFilm
+  fetchFavoriteFilms,
+  fetchPromoFilm,
+  fetchCurrentFilm,
+  fetchComments,
+  fetchSimilarFilms
 } from './action';
-
-import {
-  DEFAULT_ACTIVE_GENRE,
-  FILM_COUNT,
-  AuthorizationStatusName
-} from '../const/const';
-import { CardType } from '../types/types';
 
 
 type initialStateType = {
   activeGenre: string;
   films: CardType[];
-  promoFilm: CardType;
+  currentFilm:CardType | null,
+  promoFilm: CardType | null;
+  similarFilms: CardType[];
   shownFilmsCount: number;
   authorizationStatus: AuthorizationStatusName;
   favoriteFilms: CardType[];
-  isDataLoaded: boolean,
+  isPromoLoaded: boolean,
+  isCatalogLoaded: boolean,
+  comments: Review[],
 };
 
 const initialState: initialStateType = {
   activeGenre: DEFAULT_ACTIVE_GENRE,
-  promoFilm: PromoBudapest,
+  currentFilm: null,
+  promoFilm: null,
   films: [],
+  similarFilms: [],
   shownFilmsCount: FILM_COUNT,
   authorizationStatus: AuthorizationStatusName.Unknown,
   favoriteFilms:[],
-  isDataLoaded: false,
+  isCatalogLoaded: false,
+  isPromoLoaded: false,
+  comments: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -44,11 +49,11 @@ const reducer = createReducer(initialState, (builder) => {
       state.activeGenre = action.payload;
       state.shownFilmsCount = FILM_COUNT;
     })
-    .addCase(getListFilms, (state, action) => {
+    .addCase(fetchListFilms, (state, action) => {
       state.activeGenre = DEFAULT_ACTIVE_GENRE;
       state.films = action.payload;
       state.shownFilmsCount = FILM_COUNT;
-      state.isDataLoaded = true;
+      state.isCatalogLoaded = true;
     })
     .addCase(resetFilmsCount, (state) => {
       state.activeGenre = DEFAULT_ACTIVE_GENRE;
@@ -60,12 +65,25 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(getPromoFilm, (state, action) => {
+    .addCase(fetchPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
+      state.isPromoLoaded = true;
     })
-    .addCase(getFavoriteFilms, (state, action) => {
+    .addCase(fetchFavoriteFilms, (state, action) => {
       state.favoriteFilms = action.payload;
+    })
+    .addCase(fetchCurrentFilm, (state, action) => {
+      state.currentFilm = action.payload;
+    })
+    .addCase(fetchComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(fetchSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
     });
+  // .addCase(updateFavoriteList, (state, action) => {
+  //   state.favoriteFilms = action.payload;
+  // });
 });
 
 export { reducer };

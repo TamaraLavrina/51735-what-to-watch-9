@@ -1,13 +1,22 @@
 import {Navigate} from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatusName } from '../../const/const';
+import { isCheckedAuth } from '../../services/utils';
+import Loader from '../../components/loader/loader';
 
 type PrivateRouteProps = {
-  authorizationStatus: AuthorizationStatusName;
   children: JSX.Element;
 }
 
 function PrivateRoute(props: PrivateRouteProps): JSX.Element {
-  const {authorizationStatus, children} = props;
+  const { authorizationStatus} = useAppSelector((state) => state);
+  const { children} = props;
+
+  if (
+    isCheckedAuth(authorizationStatus)
+  ) {
+    return <Loader />;
+  }
 
   return (
     authorizationStatus === AuthorizationStatusName.Auth
