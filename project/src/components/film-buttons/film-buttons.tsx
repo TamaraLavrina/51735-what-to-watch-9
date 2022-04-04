@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import ErrorLoader from '../loader/error-loader';
 import { CardType } from '../../types/types';
-import { useAppSelector } from '../../hooks';
-import { store } from '../../store';
 import { changeIsFavoriteStatusAction } from '../../store/api-actions';
 
 type FilmButtonsProps = {
@@ -10,18 +10,23 @@ type FilmButtonsProps = {
 
 function FilmButtons({ currentFilm }: FilmButtonsProps): JSX.Element {
   const { authorizationStatus } = useAppSelector((state) => state);
-  const isFavorite = useAppSelector((state) => state.currentFilm.isFavorite);
+  const dispatch = useAppDispatch();
+  const isAuth = authorizationStatus === 'AUTH';
 
+  if (!currentFilm) {
+    return <ErrorLoader />;
+  }
 
-  function changeIsFavoriteStatus(status: number) {
-    if(currentFilm.id) {
+  const isFavorite = currentFilm.isFavorite;
+  const changeIsFavoriteStatus = (status: number) => {
+    if (currentFilm.id) {
       const data = {
         filmId: currentFilm.id,
         status: status,
       };
-      store.dispatch(changeIsFavoriteStatusAction(data));
+      dispatch(changeIsFavoriteStatusAction(data));
     }
-  }
+  };
 
   return (
     <div className="film-card__buttons">
@@ -34,17 +39,25 @@ function FilmButtons({ currentFilm }: FilmButtonsProps): JSX.Element {
         </svg>
         <span>Play</span>
       </Link>
-      {authorizationStatus === 'AUTH' && (
+      {isAuth && (
         <>
           {isFavorite ? (
-            <button className="btn btn--list film-card__button" type="button" onClick={() => changeIsFavoriteStatus(0)}>
+            <button
+              className="btn btn--list film-card__button"
+              type="button"
+              onClick={() => changeIsFavoriteStatus(0)}
+            >
               <svg viewBox="0 0 18 14" width="18" height="14">
                 <use xlinkHref="#in-list"></use>
               </svg>
               <span>My list</span>
             </button>
           ) : (
-            <button className="btn btn--list film-card__button" type="button" onClick={() => changeIsFavoriteStatus(1)}>
+            <button
+              className="btn btn--list film-card__button"
+              type="button"
+              onClick={() => changeIsFavoriteStatus(1)}
+            >
               <svg viewBox="0 0 19 20" width="19" height="20">
                 <use xlinkHref="#add"></use>
               </svg>

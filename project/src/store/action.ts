@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { CardType, Review } from '../types/types';
-import { AuthorizationStatusName, AppRoute } from '../const/const';
+import { AuthorizationStatusName } from '../const/const';
 
 const changeGenre = createAction(
   'changeGenre',
@@ -56,7 +56,7 @@ const increaseFilmsCount = createAction('showMoreFilms');
 const requireAuthorization = createAction<AuthorizationStatusName>(
   'requireAuthorization',
 );
-const redirectToRoute = createAction<AppRoute>('redirectToRoute');
+const redirectToRoute = createAction<string>('redirectToRoute');
 const changeIsFavoriteStatus = createAction(
   'changeIsFavoriteStatus',
   (value: CardType) => ({

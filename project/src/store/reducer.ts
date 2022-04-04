@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DEFAULT_ACTIVE_GENRE, FILM_COUNT, AuthorizationStatusName } from '../const/const';
-import { CardType, CommentPost, Review, UserLoginDataType } from '../types/types';
+import { CardType,  Review } from '../types/types';
 import {
   changeGenre,
   fetchListFilms,
@@ -18,78 +18,28 @@ import {
 type initialStateType = {
   activeGenre: string;
   films: CardType[];
-  currentFilm:CardType,
-  promoFilm: CardType;
+  currentFilm:CardType | null,
+  promoFilm: CardType | null;
   similarFilms: CardType[];
   shownFilmsCount: number;
   authorizationStatus: AuthorizationStatusName;
   favoriteFilms: CardType[];
-  isDataLoaded: boolean,
-  userComment: CommentPost,
-  userLoginData:UserLoginDataType,
+  isPromoLoaded: boolean,
+  isCatalogLoaded: boolean,
   comments: Review[],
 };
 
 const initialState: initialStateType = {
   activeGenre: DEFAULT_ACTIVE_GENRE,
-  currentFilm: {
-    id: 0,
-    name: '',
-    posterImage: '',
-    previewImage: '',
-    backgroundImage: '',
-    backgroundColor: '',
-    videoLink: '',
-    previewVideoLink: '',
-    description: '',
-    rating: 0,
-    scoresCount: 0,
-    director: '',
-    starring: [''],
-    runTime: 0,
-    genre: '',
-    released: 0,
-    isFavorite: false,
-  },
-  promoFilm: {
-    id: 0,
-    name: '',
-    posterImage: '',
-    previewImage: '',
-    backgroundImage: '',
-    backgroundColor: '',
-    videoLink: '',
-    previewVideoLink: '',
-    description: '',
-    rating: 0,
-    scoresCount: 0,
-    director: '',
-    starring: [''],
-    runTime: 0,
-    genre: '',
-    released: 0,
-    isFavorite: false,
-  },
+  currentFilm: null,
+  promoFilm: null,
   films: [],
-  userComment: {
-    id: 0,
-    comment: {
-      comment: '',
-      rating: 0,
-    },
-  },
-  userLoginData: {
-    avatarUrl: '',
-    email: '',
-    id: 0,
-    name: '',
-    token: '',
-  },
   similarFilms: [],
   shownFilmsCount: FILM_COUNT,
   authorizationStatus: AuthorizationStatusName.Unknown,
   favoriteFilms:[],
-  isDataLoaded: false,
+  isCatalogLoaded: false,
+  isPromoLoaded: false,
   comments: [],
 };
 
@@ -103,7 +53,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.activeGenre = DEFAULT_ACTIVE_GENRE;
       state.films = action.payload;
       state.shownFilmsCount = FILM_COUNT;
-      state.isDataLoaded = true;
+      state.isCatalogLoaded = true;
     })
     .addCase(resetFilmsCount, (state) => {
       state.activeGenre = DEFAULT_ACTIVE_GENRE;
@@ -117,6 +67,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
+      state.isPromoLoaded = true;
     })
     .addCase(fetchFavoriteFilms, (state, action) => {
       state.favoriteFilms = action.payload;

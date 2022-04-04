@@ -128,12 +128,11 @@ const changeIsFavoriteStatusAction = createAsyncThunk(
 
 const postNewComment = createAsyncThunk(
   'postNewComment',
-  async ({ id, comment}: CommentPost) => {
+  async ({ filmId, comment}: CommentPost) => {
     try {
-      await api.post<CommentPost>(`comments/${id}`, comment);
-      store.dispatch(fetchCurrentFilmAction(id));
-      // store.dispatch(redirectToRoute(`${AppRoute.Movie}${id}`));
-      store.dispatch(redirectToRoute(AppRoute.Route));
+      await api.post<CommentPost>(`comments/${filmId}`, comment);
+      store.dispatch(fetchCurrentFilmAction(filmId));
+      store.dispatch(redirectToRoute(`/films/${filmId}`));
     } catch(error) {
       errorHandle(error);
     }

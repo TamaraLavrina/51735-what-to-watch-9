@@ -2,14 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import { CardType } from '../../types/types';
 import FilmButtons from '../film-buttons/film-buttons';
 
+
 type FilmCardPromoProps = {
   className?: string;
-  promofilm: CardType,
+  promoFilm: CardType,
 }
 
-function FilmCardPromo({promofilm: Promofilm, className=''}: FilmCardPromoProps): JSX.Element {
+function FilmCardPromo({promoFilm, className=''}: FilmCardPromoProps): JSX.Element {
   const navigate = useNavigate();
-  const {posterImage, name, genre, released, id} = Promofilm;
+
+  const {posterImage, name, genre, released, id} = promoFilm;
   return (
     <div className={`film-card__wrap ${className}`}>
       <div className="film-card__info">
@@ -26,7 +28,7 @@ function FilmCardPromo({promofilm: Promofilm, className=''}: FilmCardPromoProps)
             <span className="film-card__year">{released}</span>
           </p>
 
-          <FilmButtons currentFilm={Promofilm} />
+          <FilmButtons currentFilm={promoFilm} />
 
         </div>
       </div>

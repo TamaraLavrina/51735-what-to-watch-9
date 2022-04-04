@@ -1,33 +1,41 @@
-import { useParams, Navigate } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
 import MovieNavTabs from '../../components/movie-nav-tabs/movie-nav-tabs';
 import FilmButtons from '../../components/film-buttons/film-buttons';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { store } from '../../store';
-import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction, fetchFavoriteFilmsAction } from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction } from '../../store/api-actions';
+import ErrorLoader from '../../components/loader/error-loader';
+import Loader from '../../components/loader/loader';
 
 
 function Movie(): JSX.Element {
   const { id } = useParams();
-
-  useEffect(() => {
-    store.dispatch(fetchCurrentFilmAction(Number(id)));
-    store.dispatch(fetchSimilarFilmsAction(Number(id)));
-    store.dispatch(fetchCommentsAction(Number(id)));
-    store.dispatch(fetchFavoriteFilmsAction());
-  },[id]);
+  const dispatch = useAppDispatch();
 
   const currentFilm = useAppSelector((state) => state.currentFilm);
   const similarFetchedFilms = useAppSelector((state) => state.similarFilms);
   const similarFilms = similarFetchedFilms.slice(0, 4);
   const reviews = useAppSelector((state) => state.comments);
 
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(Number(id)));
+    dispatch(fetchSimilarFilmsAction(Number(id)));
+    dispatch(fetchCommentsAction(Number(id)));
+  },[id, dispatch]);
+
+
   if (!currentFilm) {
-    return <Navigate to="/" />;
+    return <Loader />;
   }
+
+  if (currentFilm === null){
+    return <ErrorLoader />;
+  }
+
+
   return (
     <>
       <section className="film-card film-card--full" style={{backgroundColor: currentFilm.backgroundColor}}>

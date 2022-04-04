@@ -41,7 +41,7 @@ type Review = {
 };
 
 type CommentPost = {
-  id: number,
+  filmId: number,
   comment: {
     comment: string,
     rating: number,

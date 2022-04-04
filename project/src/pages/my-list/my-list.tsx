@@ -2,18 +2,19 @@ import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import UserBlock from '../../components/user-block/user-block';
-import { store } from '../../store';
 import { useEffect } from 'react';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import {  fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 
 function MyList(): JSX.Element {
+  const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    store.dispatch(fetchFavoriteFilmsAction());
+    dispatch(fetchFavoriteFilmsAction());
   },[]);
 
-  const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
 
   return (
     <div className="user-page">

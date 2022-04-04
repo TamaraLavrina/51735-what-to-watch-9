@@ -1,17 +1,17 @@
-import { ChangeEvent, Fragment, useState } from 'react';
-import { FormEvent } from 'react';
-import { store } from '../../store';
+import { ChangeEvent, Fragment, useState, FormEvent } from 'react';
+import { useParams} from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
 import { MAX_SCORE } from '../../const/const';
-import { CardType } from '../../types/types';
 import { postNewComment } from '../../store/api-actions';
 
 
-type ReviewFormProps = {
-  film: CardType,
-}
+// type ReviewFormProps = {
+//   film: CardType,
+// }
 
-function ReviewForm({film} :ReviewFormProps) :JSX.Element {
-
+function ReviewForm() :JSX.Element {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
   const [commentState, setCommentState] = useState('');
   const [ratingState, setRatingState] = useState<number>(0);
 
@@ -30,12 +30,12 @@ function ReviewForm({film} :ReviewFormProps) :JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const id = film.id;
+    const filmId = Number(id);
     const comment = {
       comment: commentState,
       rating: ratingState,
     };
-    store.dispatch(postNewComment({id, comment}));
+    dispatch(postNewComment({filmId, comment}));
   };
 
   return (
@@ -63,9 +63,8 @@ function ReviewForm({film} :ReviewFormProps) :JSX.Element {
         </div>
       </div>
 
-      <div className="add-review__text"
-        style={{backgroundColor: film.backgroundColor}}
-      >
+      <div className="add-review__text">
+
         <textarea
           className="add-review__textarea"
           name="review-text"
