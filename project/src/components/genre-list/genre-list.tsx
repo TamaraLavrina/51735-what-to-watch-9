@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { changeGenre } from '../../store/action';
+import { changeGenre } from '../../store/user/user';
 import { DEFAULT_ACTIVE_GENRE, GENRES_MAX_COUNT } from '../../const/const';
 import cn from 'classnames';
 import { CardType } from '../../types/types';
@@ -11,9 +11,9 @@ const getGenresList = (movies:CardType[]) => {
 };
 
 function GenresList(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const {films} = useAppSelector(({CONTENT}) => CONTENT);
   const genres: string[] = getGenresList(films);
-  const activeGenre = useAppSelector((state) => state.activeGenre);
+  const {activeGenre} = useAppSelector(({USER}) => USER);
   const dispatch = useAppDispatch();
 
   return (

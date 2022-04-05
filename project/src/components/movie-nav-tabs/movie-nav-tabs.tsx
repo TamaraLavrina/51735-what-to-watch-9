@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardType, Review } from '../../types/types';
+import { CardType, ReviewType } from '../../types/types';
 import { TABS } from '../../const/const';
 import OverviewTab from '../movie-tabs/movie-overview-tab';
 import DetailsTab from '../movie-tabs/movie-details-tab';
@@ -8,7 +8,7 @@ import cn from 'classnames';
 
 type MovieNavTabsProps = {
   movie: CardType;
-  reviews: Review[];
+  reviews: ReviewType[];
 };
 
 function MovieNavTabs({ movie, reviews }: MovieNavTabsProps): JSX.Element {

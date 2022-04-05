@@ -9,7 +9,7 @@ type FilmButtonsProps = {
 };
 
 function FilmButtons({ currentFilm }: FilmButtonsProps): JSX.Element {
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const { authorizationStatus } = useAppSelector(({USER}) => USER);
   const dispatch = useAppDispatch();
   const isAuth = authorizationStatus === 'AUTH';
 

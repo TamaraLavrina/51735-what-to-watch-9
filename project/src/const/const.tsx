@@ -30,6 +30,13 @@ enum LOADING_STATUS {
   Failed = 'FAILED',
 }
 
+enum NameSpace {
+  login = 'LOGIN',
+  content = 'CONTENT',
+  reviewData = 'REVIEW_DATA',
+  user = 'USER',
+}
+
 enum APIRoute {
   Films = '/films',
   Promo = '/promo',
@@ -62,5 +69,6 @@ export {
   APIRoute,
   LOADING_STATUS,
   MAX_REVIEW_LENGTH,
-  MIN_REVIEW_LENGTH
+  MIN_REVIEW_LENGTH,
+  NameSpace
 };

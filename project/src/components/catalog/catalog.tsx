@@ -5,9 +5,10 @@ import ShowMoreButton from '../show-more-button/show-more-button';
 import { DEFAULT_ACTIVE_GENRE } from '../../const/const';
 
 function Catalog(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
-  const activeGenre = useAppSelector((state) => state.activeGenre);
-  const shownFilms = useAppSelector((state) => state.shownFilmsCount);
+  const {films} = useAppSelector(({CONTENT}) => CONTENT);
+  const {activeGenre} = useAppSelector(({USER}) => USER);
+  const {shownFilmsCount} = useAppSelector(({USER}) => USER);
+  const shownFilms = shownFilmsCount;
 
   const filteredFilms =
     activeGenre === DEFAULT_ACTIVE_GENRE

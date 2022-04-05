@@ -13,7 +13,6 @@ import browserHistory from '../../browser-history';
 
 
 function App(): JSX.Element {
-
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
@@ -35,10 +34,7 @@ function App(): JSX.Element {
         />
         <Route path={AppRoute.Player} element={<Player />} />
         <Route path={AppRoute.Login} element={<LogIn />} />
-        <Route
-          path={AppRoute.AddReview}
-          element={<AddReview />}
-        />
+        <Route path={AppRoute.AddReview} element={<AddReview />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </HistoryRouter>

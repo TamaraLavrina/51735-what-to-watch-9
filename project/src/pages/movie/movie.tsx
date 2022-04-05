@@ -1,24 +1,24 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useEffect } from 'react';
 import MovieNavTabs from '../../components/movie-nav-tabs/movie-nav-tabs';
 import FilmButtons from '../../components/film-buttons/film-buttons';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction } from '../../store/api-actions';
 import ErrorLoader from '../../components/loader/error-loader';
 import Loader from '../../components/loader/loader';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction } from '../../store/api-actions';
 
 
 function Movie(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
+  const {currentFilm, similarFilms, comments, isCurrentFilmLoaded } = useAppSelector(({CONTENT}) => CONTENT);
+  const similarFetchedFilms = similarFilms;
+  const similarShownFilms = similarFetchedFilms.slice(0, 4);
 
-  const currentFilm = useAppSelector((state) => state.currentFilm);
-  const similarFetchedFilms = useAppSelector((state) => state.similarFilms);
-  const similarFilms = similarFetchedFilms.slice(0, 4);
-  const reviews = useAppSelector((state) => state.comments);
+  const reviews = comments;
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(Number(id)));
@@ -26,15 +26,13 @@ function Movie(): JSX.Element {
     dispatch(fetchCommentsAction(Number(id)));
   },[id, dispatch]);
 
-
-  if (!currentFilm) {
+  if (!isCurrentFilmLoaded) {
     return <Loader />;
   }
 
   if (currentFilm === null){
     return <ErrorLoader />;
   }
-
 
   return (
     <>
@@ -83,7 +81,7 @@ function Movie(): JSX.Element {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
             <div className="catalog__films-list">
-              {similarFilms.map((film) => (
+              {similarShownFilms.map((film) => (
                 <SmallFilmCard key={film.id} film={film} />
               ))}
             </div>

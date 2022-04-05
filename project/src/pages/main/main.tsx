@@ -16,13 +16,13 @@ function Main(): JSX.Element {
     dispatch(fetchFilmsAction());
   }, [dispatch]);
 
+  const {authorizationStatus } = useAppSelector(({USER}) => USER);
   const {
-    authorizationStatus,
     promoFilm,
     isCatalogLoaded,
     isPromoLoaded,
     films,
-  } = useAppSelector((state) => state);
+  } = useAppSelector(({CONTENT}) => CONTENT);
 
   if (
     !isCatalogLoaded ||
