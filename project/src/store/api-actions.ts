@@ -9,7 +9,8 @@ import {
   fetchComments,
   fetchCurrentFilm,
   fetchSimilarFilms,
-  fetchFavoriteFilms
+  fetchFavoriteFilms,
+  postReview
 } from './action';
 import { saveToken, dropToken } from '../services/token';
 import {
@@ -132,9 +133,11 @@ const postNewComment = createAsyncThunk(
     try {
       await api.post<CommentPost>(`comments/${filmId}`, comment);
       store.dispatch(fetchCurrentFilmAction(filmId));
+      store.dispatch(postReview(true));
       store.dispatch(redirectToRoute(`/films/${filmId}`));
     } catch(error) {
       errorHandle(error);
+      store.dispatch(postReview(false));
     }
   },
 );

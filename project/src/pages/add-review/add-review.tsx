@@ -17,7 +17,7 @@ function AddReview():JSX.Element {
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(Number(id)));
-  },[id]);
+  },[id, dispatch]);
 
 
   if (!currentFilm) {

@@ -11,7 +11,8 @@ import {
   fetchPromoFilm,
   fetchCurrentFilm,
   fetchComments,
-  fetchSimilarFilms
+  fetchSimilarFilms,
+  postReview
 } from './action';
 
 
@@ -27,6 +28,7 @@ type initialStateType = {
   isPromoLoaded: boolean,
   isCatalogLoaded: boolean,
   comments: Review[],
+  isReviewPosted: boolean,
 };
 
 const initialState: initialStateType = {
@@ -41,6 +43,7 @@ const initialState: initialStateType = {
   isCatalogLoaded: false,
   isPromoLoaded: false,
   comments: [],
+  isReviewPosted: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -80,10 +83,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchSimilarFilms, (state, action) => {
       state.similarFilms = action.payload;
+    })
+    .addCase(postReview, (state, action) => {
+      state.isReviewPosted = action.payload;
     });
-  // .addCase(updateFavoriteList, (state, action) => {
-  //   state.favoriteFilms = action.payload;
-  // });
 });
 
 export { reducer };

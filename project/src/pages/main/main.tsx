@@ -14,7 +14,7 @@ function Main(): JSX.Element {
   useEffect(() => {
     dispatch(fetchPromoFilmAction());
     dispatch(fetchFilmsAction());
-  }, []);
+  }, [dispatch]);
 
   const {
     authorizationStatus,

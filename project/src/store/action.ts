@@ -64,6 +64,8 @@ const changeIsFavoriteStatus = createAction(
   }),
 );
 
+const postReview = createAction<boolean>('PostComment');
+
 export {
   changeGenre,
   fetchListFilms,
@@ -76,5 +78,6 @@ export {
   fetchCurrentFilm,
   fetchComments,
   fetchSimilarFilms,
-  changeIsFavoriteStatus
+  changeIsFavoriteStatus,
+  postReview
 };

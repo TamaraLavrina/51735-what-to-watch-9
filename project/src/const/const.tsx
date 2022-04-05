@@ -45,6 +45,9 @@ enum HttpCode {
   NotFound = 404,
 }
 
+const MAX_REVIEW_LENGTH = 400;
+const MIN_REVIEW_LENGTH = 50;
+
 export {
   AppRoute,
   AuthorizationStatusName,
@@ -57,5 +60,7 @@ export {
   GENRES_MAX_COUNT,
   HttpCode,
   APIRoute,
-  LOADING_STATUS
+  LOADING_STATUS,
+  MAX_REVIEW_LENGTH,
+  MIN_REVIEW_LENGTH
 };
