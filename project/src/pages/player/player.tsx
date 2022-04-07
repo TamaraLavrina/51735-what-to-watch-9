@@ -8,53 +8,25 @@ import { fetchCurrentFilmAction } from '../../store/api-actions';
 import ErrorLoader from '../../components/loader/error-loader';
 dayjs.extend(duration);
 
+const getFormatRemainingTime = (remaining: number): string => {
+  const HOUR_IN_MS = 3600;
+  const format = remaining >= HOUR_IN_MS ? '-HH:mm:ss' : '-mm:ss';
+  return dayjs.duration(remaining, 'seconds').format(format);
+};
+
+
 function Player(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const { currentFilm, isCurrentFilmLoaded } = useAppSelector(({ CONTENT }) => CONTENT);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const progressRef = useRef<HTMLDivElement | null>(null);
   const [isActive, setIsActive] = useState(true);
   const [currentTimeVideo, setCurrentTimeVideo] = useState<number>(0);
-  const progressBar: { left: string } = { left: `${currentTimeVideo}%` };
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(Number(id)));
   }, [id, dispatch]);
-
-  if (!currentFilm || !isCurrentFilmLoaded) {
-    return <Loader />;
-  }
-
-  if (currentFilm === null) {
-    return <ErrorLoader />;
-  }
-
-  const videoLink = currentFilm.videoLink;
-  const handleOnTimeUpdate = () => {
-    if (videoRef && videoRef.current) {
-      setCurrentTimeVideo((videoRef.current.currentTime / videoRef.current.duration) * 100);
-    }
-  };
-
-  const filmDuration = dayjs.duration(
-    (currentFilm.runTime - currentTimeVideo),
-    'seconds',
-  );
-
-  const formatedFilmDuration =
-    filmDuration.asHours() >= 1
-      ? filmDuration.format('-HH:mm:ss')
-      : filmDuration.format('-mm:ss');
-
-  const handleVideoProgress = (evt: React.FormEvent<HTMLProgressElement>) => {
-    if (videoRef && videoRef.current) {
-      const target = evt.target as HTMLProgressElement;
-      const togleValue = Number(target.value);
-      videoRef.current.currentTime =
-            (videoRef.current.duration / 100) * togleValue;
-      setCurrentTimeVideo(togleValue);
-    }
-  };
 
   useEffect(() => {
     if (isActive) {
@@ -68,6 +40,24 @@ function Player(): JSX.Element {
     }
   }, [isActive]);
 
+  if (!currentFilm || !isCurrentFilmLoaded) {
+    return <Loader />;
+  }
+
+  if (currentFilm === null) {
+    return <ErrorLoader />;
+  }
+
+  const handleTimeUpdate = () => {
+    if (videoRef && videoRef.current) {
+      const percent = Math.round(videoRef.current?.currentTime*100 / videoRef?.current.duration);
+      setCurrentTimeVideo(Math.round(videoRef?.current.duration - videoRef.current?.currentTime));
+      if (progressRef.current) {
+        progressRef.current.style.left = `${percent}%`;
+      }
+    }
+  };
+
   const handlePlayFilm = () => {
     setIsActive(!isActive);
   };
@@ -76,14 +66,15 @@ function Player(): JSX.Element {
     videoRef.current?.requestFullscreen();
   };
 
-
   return (
     <div className="player">
       <video
         ref={videoRef}
-        src={videoLink}
+        src={currentFilm.videoLink}
         className="player__video"
-        onTimeUpdate={handleOnTimeUpdate}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={() => {videoRef.current?.play();}}
+        onEnded={() => {videoRef.current?.pause();}}
       >
       </video>
       <button
@@ -101,29 +92,26 @@ function Player(): JSX.Element {
           <div className="player__time">
             <progress
               className="player__progress"
-              onChange={(evt) => handleVideoProgress(evt)}
-              value={currentTimeVideo}
               max="100"
+
             >
             </progress>
             <div
               className="player__toggler"
-              style={progressBar}
+              ref={progressRef}
             >
               Toggler
             </div>
           </div>
           <div className="player__time-value">
-            {formatedFilmDuration}
+            {getFormatRemainingTime(currentTimeVideo)}
           </div>
         </div>
         <div className="player__controls-row">
           <button
             type="button"
             className="player__play"
-            onClick={() => {
-              handlePlayFilm();
-            }}
+            onClick={handlePlayFilm}
           >
             <svg viewBox="0 0 19 19" width="19" height="19">
               {isActive ? (
@@ -138,9 +126,7 @@ function Player(): JSX.Element {
           <button
             type="button"
             className="player__full-screen"
-            onClick={() => {
-              handleFullScreen();
-            }}
+            onClick={handleFullScreen}
           >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
