@@ -8,6 +8,8 @@ import ErrorLoader from '../../components/loader/error-loader';
 import Loader from '../../components/loader/loader';
 import { fetchPromoFilmAction, fetchFilmsAction } from '../../store/api-actions';
 import { isCheckedAuth } from '../../services/utils';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getFilms, getIsCatalogLoaded, getIsPromoLoaded, getPromoFilm } from '../../store/films/selectors';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,13 +18,11 @@ function Main(): JSX.Element {
     dispatch(fetchFilmsAction());
   }, [dispatch]);
 
-  const {authorizationStatus } = useAppSelector(({USER}) => USER);
-  const {
-    promoFilm,
-    isCatalogLoaded,
-    isPromoLoaded,
-    films,
-  } = useAppSelector(({FILMS}) => FILMS);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const promoFilm = useAppSelector(getPromoFilm);
+  const isCatalogLoaded = useAppSelector(getIsCatalogLoaded);
+  const isPromoLoaded = useAppSelector(getIsPromoLoaded);
+  const films = useAppSelector(getFilms);
 
   if (
     !isCatalogLoaded ||

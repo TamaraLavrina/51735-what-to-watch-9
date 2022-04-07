@@ -3,6 +3,8 @@ import { changeGenre } from '../../store/user/user';
 import { DEFAULT_ACTIVE_GENRE, GENRES_MAX_COUNT } from '../../const/const';
 import cn from 'classnames';
 import { CardType } from '../../types/types';
+import { getActiveGenres } from '../../store/user/selectors';
+import { getFilms } from '../../store/films/selectors';
 
 const getGenresList = (movies:CardType[]) => {
   const moviesGenres = Array.from(new Set(movies.map((movie) => movie.genre)));
@@ -11,9 +13,9 @@ const getGenresList = (movies:CardType[]) => {
 };
 
 function GenresList(): JSX.Element {
-  const {films} = useAppSelector(({FILMS}) => FILMS);
+  const films = useAppSelector(getFilms);
   const genres: string[] = getGenresList(films);
-  const {activeGenre} = useAppSelector(({USER}) => USER);
+  const activeGenre = useAppSelector(getActiveGenres);
   const dispatch = useAppDispatch();
 
   return (

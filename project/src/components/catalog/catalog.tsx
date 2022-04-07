@@ -3,11 +3,13 @@ import { useAppSelector } from '../../hooks/';
 import SmallFilmCard from '../small-film-card/small-film-card';
 import ShowMoreButton from '../show-more-button/show-more-button';
 import { DEFAULT_ACTIVE_GENRE } from '../../const/const';
+import { getActiveGenres, getShownFilmsCount } from '../../store/user/selectors';
+import { getFilms } from '../../store/films/selectors';
 
 function Catalog(): JSX.Element {
-  const {films} = useAppSelector(({FILMS}) => FILMS);
-  const {activeGenre, shownFilmsCount} = useAppSelector(({USER}) => USER);
-  const shownFilms = shownFilmsCount;
+  const films = useAppSelector(getFilms);
+  const activeGenre = useAppSelector(getActiveGenres);
+  const shownFilms = useAppSelector(getShownFilmsCount);
 
   const filteredFilms =
     activeGenre === DEFAULT_ACTIVE_GENRE

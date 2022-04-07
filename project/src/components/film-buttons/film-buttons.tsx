@@ -3,13 +3,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import ErrorLoader from '../loader/error-loader';
 import { CardType } from '../../types/types';
 import { changeIsFavoriteStatusAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 type FilmButtonsProps = {
   currentFilm: CardType;
 };
 
 function FilmButtons({ currentFilm }: FilmButtonsProps): JSX.Element {
-  const { authorizationStatus } = useAppSelector(({USER}) => USER);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const isAuth = authorizationStatus === 'AUTH';
 

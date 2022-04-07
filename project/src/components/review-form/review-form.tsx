@@ -3,6 +3,7 @@ import { useParams} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { MAX_SCORE, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../const/const';
 import { postNewComment } from '../../store/api-actions';
+import { getIsReviewPosted } from '../../store/reviews/selectors';
 
 
 // type ReviewFormProps = {
@@ -14,7 +15,7 @@ function ReviewForm() :JSX.Element {
   const dispatch = useAppDispatch();
   const [commentState, setCommentState] = useState('');
   const [ratingState, setRatingState] = useState<number>(0);
-  const { isReviewPosted } = useAppSelector(({REVIEWS}) => REVIEWS);
+  const isReviewPosted = useAppSelector(getIsReviewPosted);
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setCommentState(evt.target.value);

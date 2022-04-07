@@ -9,12 +9,16 @@ import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import ErrorLoader from '../../components/loader/error-loader';
 import Loader from '../../components/loader/loader';
 import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction } from '../../store/api-actions';
+import { getComments, getCurrentFilm, getIsCurrentFilmLoaded, getSimilarFilms } from '../../store/films/selectors';
 
 
 function Movie(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const {currentFilm, similarFilms, comments, isCurrentFilmLoaded } = useAppSelector(({FILMS}) => FILMS);
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const comments = useAppSelector(getComments);
+  const isCurrentFilmLoaded  = useAppSelector(getIsCurrentFilmLoaded);
   const similarFetchedFilms = similarFilms;
   const similarShownFilms = similarFetchedFilms.slice(0, 4);
 

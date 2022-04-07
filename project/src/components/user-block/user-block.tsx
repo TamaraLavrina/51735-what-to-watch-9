@@ -1,9 +1,10 @@
 import UserBlockLogged from './user-block-logged';
 import UserBlockUnlogged from './user-block-unlogged';
 import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 function UserBlock():JSX.Element {
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <ul className="user-block">
