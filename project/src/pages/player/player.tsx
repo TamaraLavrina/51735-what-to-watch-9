@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import { fetchCurrentFilmAction } from '../../store/api-actions';
 import ErrorLoader from '../../components/loader/error-loader';
+import { getCurrentFilm, getIsCurrentFilmLoaded } from '../../store/films/selectors';
 dayjs.extend(duration);
 
 const getFormatRemainingTime = (remaining: number): string => {
@@ -18,7 +19,8 @@ const getFormatRemainingTime = (remaining: number): string => {
 function Player(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { currentFilm, isCurrentFilmLoaded } = useAppSelector(({ FILMS }) => FILMS);
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const isCurrentFilmLoaded  = useAppSelector(getIsCurrentFilmLoaded);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
   const [isActive, setIsActive] = useState(true);

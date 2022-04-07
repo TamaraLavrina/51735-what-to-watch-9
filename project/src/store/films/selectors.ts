@@ -7,6 +7,7 @@ const getCurrentFilm = (state: State): CardType | null =>
 const getPromoFilm = (state: State): CardType | null =>
   state[NameSpace.films].promoFilm;
 const getFilms = (state: State): CardType[] => state[NameSpace.films].films;
+const getFavoriteFilms = (state: State): CardType[] => state[NameSpace.films].favoriteFilms;
 const getSimilarFilms = (state: State): CardType[] =>
   state[NameSpace.films].similarFilms;
 const getIsPromoLoaded = (state: State): boolean =>
@@ -29,5 +30,6 @@ export {
   getIsCatalogLoaded,
   getIsFavoriteLoaded,
   getIsCurrentFilmLoaded,
-  getComments
+  getComments,
+  getFavoriteFilms
 };
