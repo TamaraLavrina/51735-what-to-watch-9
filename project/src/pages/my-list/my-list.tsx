@@ -8,7 +8,7 @@ import {  fetchFavoriteFilmsAction } from '../../store/api-actions';
 import Loader from '../../components/loader/loader';
 
 function MyList(): JSX.Element {
-  const {favoriteFilms, isFavoriteLoaded} = useAppSelector(({CONTENT}) => CONTENT);
+  const {favoriteFilms, isFavoriteLoaded} = useAppSelector(({FILMS}) => FILMS);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

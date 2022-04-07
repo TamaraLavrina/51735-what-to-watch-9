@@ -18,6 +18,7 @@ function FilmButtons({ currentFilm }: FilmButtonsProps): JSX.Element {
   }
 
   const isFavorite = currentFilm.isFavorite;
+
   const changeIsFavoriteStatus = (status: number) => {
     if (currentFilm.id) {
       const data = {
@@ -41,29 +42,22 @@ function FilmButtons({ currentFilm }: FilmButtonsProps): JSX.Element {
       </Link>
       {isAuth && (
         <>
-          {isFavorite ? (
-            <button
-              className="btn btn--list film-card__button"
-              type="button"
-              onClick={() => changeIsFavoriteStatus(0)}
-            >
+          <button
+            className="btn btn--list film-card__button"
+            type="button"
+            onClick={() => changeIsFavoriteStatus(Number(!isFavorite))}
+          >
+            {isFavorite ?(
               <svg viewBox="0 0 18 14" width="18" height="14">
                 <use xlinkHref="#in-list"></use>
-              </svg>
-              <span>My list</span>
-            </button>
-          ) : (
-            <button
-              className="btn btn--list film-card__button"
-              type="button"
-              onClick={() => changeIsFavoriteStatus(1)}
-            >
-              <svg viewBox="0 0 19 20" width="19" height="20">
-                <use xlinkHref="#add"></use>
-              </svg>
-              <span>My list</span>
-            </button>
-          )}
+              </svg>):
+              (
+                <svg viewBox="0 0 19 20" width="19" height="20">
+                  <use xlinkHref="#add"></use>
+                </svg>
+              )}
+            <span>My list</span>
+          </button>
 
           <Link
             className="btn film-card__button"

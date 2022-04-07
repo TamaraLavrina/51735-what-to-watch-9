@@ -14,7 +14,7 @@ import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchCommentsAction } 
 function Movie(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const {currentFilm, similarFilms, comments, isCurrentFilmLoaded } = useAppSelector(({CONTENT}) => CONTENT);
+  const {currentFilm, similarFilms, comments, isCurrentFilmLoaded } = useAppSelector(({FILMS}) => FILMS);
   const similarFetchedFilms = similarFilms;
   const similarShownFilms = similarFetchedFilms.slice(0, 4);
 

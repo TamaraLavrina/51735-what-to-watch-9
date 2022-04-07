@@ -7,7 +7,7 @@ const initialState: reviewDataType = {
 };
 
 export const reviewData = createSlice({
-  name: NameSpace.reviewData,
+  name: NameSpace.reviews,
   initialState,
   reducers: {
     postReview: (state, action) => {

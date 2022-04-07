@@ -64,17 +64,13 @@ function SignIn(): JSX.Element {
   };
 
   const isValid = Object.values(formState).some(({ error }) => error);
-  const formFieldsKeys = Object.keys(formState);
-  const currentError = formFieldsKeys.find((name) => formState[name].errorText);
 
   return (
     <div className="sign-in user-page__content">
       <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
-        <div className="sign-in__message">
-          {currentError && <p>{currentError}</p>}
-        </div>
         {Object.entries(formFields).map(([name, label]) => (
-          <div className="sign-in__fields" key={name} >
+          <div className="sign-in__fields" key={name}>
+            {formState[name].error && <p>{formState[name].errorText}</p>}
             <div
               className={cn('sign-in__field', {
                 'sign-in__field--error': formState[name].error,
@@ -94,7 +90,6 @@ function SignIn(): JSX.Element {
               </label>
             </div>
           </div>
-
         ))}
         <div className="sign-in__submit">
           <button

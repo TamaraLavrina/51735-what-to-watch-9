@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {NameSpace} from '../../const/const';
-import {contentDataType} from '../../types/state';
+import {filmsType} from '../../types/state';
 
-const initialState: contentDataType = {
+const initialState: filmsType = {
   currentFilm: null,
   promoFilm: null,
   films: [],
@@ -15,8 +15,8 @@ const initialState: contentDataType = {
   comments: [],
 };
 
-export const content = createSlice({
-  name: NameSpace.content,
+export const films = createSlice({
+  name: NameSpace.films,
   initialState,
   reducers: {
     fetchListFilms: (state, action) => {
@@ -41,7 +41,17 @@ export const content = createSlice({
     fetchSimilarFilms: (state, action) => {
       state.similarFilms = action.payload;
     },
+    updateFavoriteFilm: (state, action) => {
+      const id = (state.films.findIndex((film) => (film.id) === action.payload.id))+1;
+      state.films[id] = action.payload;
+      if (state.currentFilm && state.currentFilm.id === id) {
+        state.currentFilm = action.payload;
+      }
+      if (state.promoFilm && state.promoFilm.id === id) {
+        state.promoFilm = action.payload;
+      }
+    },
   },
 });
 
-export const { fetchListFilms, fetchPromoFilm, fetchFavoriteFilms, fetchCurrentFilm, fetchComments, fetchSimilarFilms }  = content.actions;
+export const { fetchListFilms, fetchPromoFilm, fetchFavoriteFilms, fetchCurrentFilm, fetchComments, fetchSimilarFilms, updateFavoriteFilm }  = films.actions;

@@ -6,6 +6,7 @@ const initialState: userType = {
   authorizationStatus: AuthorizationStatusName.Unknown,
   activeGenre: DEFAULT_ACTIVE_GENRE,
   shownFilmsCount: FILM_COUNT,
+  userAvatar: '',
 };
 
 export const user = createSlice({
@@ -26,8 +27,11 @@ export const user = createSlice({
     increaseFilmsCount: (state) => {
       state.shownFilmsCount = state.shownFilmsCount + FILM_COUNT;
     },
+    setUserAvatar: (state, action) => {
+      state.userAvatar = action.payload;
+    },
   },
 });
 
-export const { requireAuthorization, changeGenre, resetFilmsCount, increaseFilmsCount }  = user.actions;
+export const { requireAuthorization, changeGenre, resetFilmsCount, increaseFilmsCount, setUserAvatar }  = user.actions;
 

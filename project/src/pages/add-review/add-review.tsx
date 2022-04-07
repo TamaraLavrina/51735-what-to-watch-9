@@ -13,7 +13,7 @@ function AddReview():JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const {currentFilm} = useAppSelector(({CONTENT}) => CONTENT);
+  const {currentFilm} = useAppSelector(({FILMS}) => FILMS);
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(Number(id)));

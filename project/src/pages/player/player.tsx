@@ -18,7 +18,7 @@ const getFormatRemainingTime = (remaining: number): string => {
 function Player(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { currentFilm, isCurrentFilmLoaded } = useAppSelector(({ CONTENT }) => CONTENT);
+  const { currentFilm, isCurrentFilmLoaded } = useAppSelector(({ FILMS }) => FILMS);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
   const [isActive, setIsActive] = useState(true);

@@ -11,7 +11,7 @@ const getGenresList = (movies:CardType[]) => {
 };
 
 function GenresList(): JSX.Element {
-  const {films} = useAppSelector(({CONTENT}) => CONTENT);
+  const {films} = useAppSelector(({FILMS}) => FILMS);
   const genres: string[] = getGenresList(films);
   const {activeGenre} = useAppSelector(({USER}) => USER);
   const dispatch = useAppDispatch();

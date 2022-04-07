@@ -22,7 +22,7 @@ function Main(): JSX.Element {
     isCatalogLoaded,
     isPromoLoaded,
     films,
-  } = useAppSelector(({CONTENT}) => CONTENT);
+  } = useAppSelector(({FILMS}) => FILMS);
 
   if (
     !isCatalogLoaded ||

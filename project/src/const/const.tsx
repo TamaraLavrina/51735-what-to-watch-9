@@ -31,9 +31,8 @@ enum LOADING_STATUS {
 }
 
 enum NameSpace {
-  login = 'LOGIN',
-  content = 'CONTENT',
-  reviewData = 'REVIEW_DATA',
+  films = 'FILMS',
+  reviews = 'REVIEWS',
   user = 'USER',
 }
 

@@ -8,10 +8,11 @@ import {
   fetchFavoriteFilms,
   fetchPromoFilm,
   fetchComments,
-  fetchSimilarFilms
-} from '../store/content/content';
+  fetchSimilarFilms,
+  updateFavoriteFilm
+} from './films/films';
 import { requireAuthorization } from '../store/user/user';
-import { postReview } from '../store/review-data/review-data';
+import { postReview } from './reviews/reviews';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatusName, AppRoute } from '../const/const';
 import {
@@ -24,6 +25,7 @@ import {
 } from '../types/types';
 
 import errorHandle from '../services/error-handle';
+import { saveAvatarUrl } from '../services/avatarUrl';
 
 const fetchFilmsAction = createAsyncThunk('data/fetchFilms', async () => {
   try {
@@ -49,9 +51,10 @@ const loginAction = createAsyncThunk(
   async ({ login: email, password }: AuthData) => {
     try {
       const {
-        data: { token },
+        data: { token, avatarUrl },
       } = await api.post<UserData>(APIRoute.Login, { email, password });
       saveToken(token);
+      saveAvatarUrl(avatarUrl);
       store.dispatch(requireAuthorization(AuthorizationStatusName.Auth));
       store.dispatch(redirectToRoute(AppRoute.Route));
     } catch (error) {
@@ -139,8 +142,8 @@ const changeIsFavoriteStatusAction = createAsyncThunk(
   'changeIsFavoriteStatusAction',
   async ({ filmId, status }: isFavoriteStatus) => {
     try {
-      await api.post<isFavoriteStatus>(`/favorite/${filmId}/${status}`);
-      store.dispatch(fetchCurrentFilmAction(filmId));
+      const { data } =  await api.post<isFavoriteStatus>(`/favorite/${filmId}/${status}`);
+      store.dispatch(updateFavoriteFilm(data));
     } catch (error) {
       errorHandle(error);
     }

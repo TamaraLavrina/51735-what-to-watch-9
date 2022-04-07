@@ -14,7 +14,7 @@ function ReviewForm() :JSX.Element {
   const dispatch = useAppDispatch();
   const [commentState, setCommentState] = useState('');
   const [ratingState, setRatingState] = useState<number>(0);
-  const { isReviewPosted } = useAppSelector(({REVIEW_DATA}) => REVIEW_DATA);
+  const { isReviewPosted } = useAppSelector(({REVIEWS}) => REVIEWS);
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setCommentState(evt.target.value);

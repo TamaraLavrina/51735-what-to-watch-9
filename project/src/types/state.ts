@@ -6,9 +6,10 @@ export type userType = {
   authorizationStatus: AuthorizationStatusName;
   activeGenre: string;
   shownFilmsCount: number;
+  userAvatar: string;
 };
 
-export type contentDataType = {
+export type filmsType = {
   films: CardType[];
   currentFilm:CardType | null,
   promoFilm: CardType | null;
