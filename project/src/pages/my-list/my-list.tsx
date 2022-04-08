@@ -5,16 +5,21 @@ import UserBlock from '../../components/user-block/user-block';
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import {  fetchFavoriteFilmsAction } from '../../store/api-actions';
-
+import Loader from '../../components/loader/loader';
+import { getFavoriteFilms, getIsFavoriteLoaded } from '../../store/films/selectors';
 
 function MyList(): JSX.Element {
-  const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
+  const isFavoriteLoaded = useAppSelector(getIsFavoriteLoaded);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchFavoriteFilmsAction());
-  },[]);
+  },[dispatch]);
 
+  if (!isFavoriteLoaded) {
+    return <Loader />;
+  }
 
   return (
     <div className="user-page">

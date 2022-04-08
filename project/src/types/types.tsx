@@ -27,9 +27,10 @@ type UserData = {
   id: number;
   email: string;
   token: string;
+  avatarUrl: string;
 };
 
-type Review = {
+type ReviewType = {
   comment: string;
   date: string;
   id: number;
@@ -62,4 +63,4 @@ type isFavoriteStatus = {
 };
 
 
-export type { AuthData, CardType, UserData, Review, CommentPost, UserLoginDataType, isFavoriteStatus };
+export type { AuthData, CardType, UserData, ReviewType, CommentPost, UserLoginDataType, isFavoriteStatus };

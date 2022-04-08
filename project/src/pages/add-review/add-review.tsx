@@ -7,17 +7,18 @@ import UserBlock from '../../components/user-block/user-block';
 import ReviewForm from '../../components/review-form/review-form';
 import ErrorLoader from '../../components/loader/error-loader';
 import { fetchCurrentFilmAction } from '../../store/api-actions';
+import { getCurrentFilm } from '../../store/films/selectors';
 
 
 function AddReview():JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const currentFilm = useAppSelector((state) => state.currentFilm);
+  const currentFilm = useAppSelector(getCurrentFilm);
 
   useEffect(() => {
     dispatch(fetchCurrentFilmAction(Number(id)));
-  },[id]);
+  },[id, dispatch]);
 
 
   if (!currentFilm) {

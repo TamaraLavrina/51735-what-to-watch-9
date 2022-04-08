@@ -7,22 +7,28 @@ import Header from '../../components/header/header';
 import ErrorLoader from '../../components/loader/error-loader';
 import Loader from '../../components/loader/loader';
 import { fetchPromoFilmAction, fetchFilmsAction } from '../../store/api-actions';
+import { resetFilmsCount } from '../../store/user/user';
 import { isCheckedAuth } from '../../services/utils';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getFilms, getIsCatalogLoaded, getIsPromoLoaded, getPromoFilm } from '../../store/films/selectors';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchPromoFilmAction());
     dispatch(fetchFilmsAction());
-  }, []);
+  }, [dispatch]);
 
-  const {
-    authorizationStatus,
-    promoFilm,
-    isCatalogLoaded,
-    isPromoLoaded,
-    films,
-  } = useAppSelector((state) => state);
+  useEffect(() => () => {
+    dispatch(resetFilmsCount());
+  }, [dispatch],
+  );
+
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const promoFilm = useAppSelector(getPromoFilm);
+  const isCatalogLoaded = useAppSelector(getIsCatalogLoaded);
+  const isPromoLoaded = useAppSelector(getIsPromoLoaded);
+  const films = useAppSelector(getFilms);
 
   if (
     !isCatalogLoaded ||

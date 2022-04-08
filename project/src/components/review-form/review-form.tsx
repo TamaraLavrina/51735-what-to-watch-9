@@ -1,8 +1,9 @@
 import { ChangeEvent, Fragment, useState, FormEvent } from 'react';
 import { useParams} from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
-import { MAX_SCORE } from '../../const/const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { MAX_SCORE, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../const/const';
 import { postNewComment } from '../../store/api-actions';
+import { getIsReviewPosted } from '../../store/reviews/selectors';
 
 
 // type ReviewFormProps = {
@@ -14,6 +15,7 @@ function ReviewForm() :JSX.Element {
   const dispatch = useAppDispatch();
   const [commentState, setCommentState] = useState('');
   const [ratingState, setRatingState] = useState<number>(0);
+  const isReviewPosted = useAppSelector(getIsReviewPosted);
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setCommentState(evt.target.value);
@@ -72,12 +74,22 @@ function ReviewForm() :JSX.Element {
           placeholder="Review text"
           value={commentState}
           onChange={handleCommentChange}
-          minLength={50}
-          maxLength={400}
+          minLength={MIN_REVIEW_LENGTH}
+          maxLength={MAX_REVIEW_LENGTH}
         >
         </textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button
+            className="add-review__btn"
+            type="submit"
+            disabled={
+              ratingState === 0 ||
+              commentState.length < MIN_REVIEW_LENGTH ||
+              commentState.length > MAX_REVIEW_LENGTH ||
+              isReviewPosted
+            }
+          >Post
+          </button>
         </div>
       </div>
     </form>

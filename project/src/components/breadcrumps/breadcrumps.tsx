@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CardType } from '../../types/types';
 
-
 type BreadcrumbsProps ={
   currentFilm: CardType,
 }

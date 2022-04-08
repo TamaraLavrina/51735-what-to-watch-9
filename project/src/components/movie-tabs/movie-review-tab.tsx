@@ -1,8 +1,8 @@
-import {  Review } from '../../types/types';
+import {  ReviewType } from '../../types/types';
 import dayjs from 'dayjs';
 
 type ReviewTabTabProps = {
-  reviews: Review[];
+  reviews: ReviewType[];
 }
 
 function ReviewTab({reviews}: ReviewTabTabProps):JSX.Element {
