@@ -4,6 +4,18 @@ type DetailsTabProps = {
   movie: CardType;
 };
 
+const getRunTimeFormatted = (runTime: number) => {
+  const hours = Math.trunc(runTime / 60);
+  const minutes = runTime - hours * 60;
+  if (hours === 0) {
+    return `${minutes}m`;
+  }
+  else if (minutes === 0) {
+    return `${hours}h`;
+  }
+  return `${hours}h ${minutes}m`;
+};
+
 function DetailsTab({ movie }: DetailsTabProps): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
@@ -15,7 +27,7 @@ function DetailsTab({ movie }: DetailsTabProps): JSX.Element {
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {movie.starring.join(`', '${(<br />)}`)}
+            {movie.starring.join( '\n')}
           </span>
         </p>
       </div>
@@ -23,7 +35,7 @@ function DetailsTab({ movie }: DetailsTabProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{movie.runTime}</span>
+          <span className="film-card__details-value">{getRunTimeFormatted(movie.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

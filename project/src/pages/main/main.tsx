@@ -7,6 +7,7 @@ import Header from '../../components/header/header';
 import ErrorLoader from '../../components/loader/error-loader';
 import Loader from '../../components/loader/loader';
 import { fetchPromoFilmAction, fetchFilmsAction } from '../../store/api-actions';
+import { resetFilmsCount } from '../../store/user/user';
 import { isCheckedAuth } from '../../services/utils';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { getFilms, getIsCatalogLoaded, getIsPromoLoaded, getPromoFilm } from '../../store/films/selectors';
@@ -17,6 +18,11 @@ function Main(): JSX.Element {
     dispatch(fetchPromoFilmAction());
     dispatch(fetchFilmsAction());
   }, [dispatch]);
+
+  useEffect(() => () => {
+    dispatch(resetFilmsCount());
+  }, [dispatch],
+  );
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const promoFilm = useAppSelector(getPromoFilm);
