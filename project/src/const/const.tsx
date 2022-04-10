@@ -22,13 +22,6 @@ const TABS = ['Overview', 'Details', 'Reviews'];
 const FILM_COUNT = 8;
 const GENRES_MAX_COUNT = 9;
 
-enum LOADING_STATUS {
-  Idle = 'IDLE',
-  Loading = 'LOADING',
-  Succeeded = 'SUCCEEDED',
-  Failed = 'FAILED',
-}
-
 enum APIRoute {
   Films = '/films',
   Promo = '/promo',
@@ -44,6 +37,13 @@ enum HttpCode {
   NotFound = 404,
 }
 
+enum NameSpace {
+  films = 'FILMS',
+  reviews = 'REVIEWS',
+  user = 'USER',
+}
+
+
 export {
   AppRoute,
   AuthorizationStatusName,
@@ -56,5 +56,5 @@ export {
   GENRES_MAX_COUNT,
   HttpCode,
   APIRoute,
-  LOADING_STATUS
+  NameSpace
 };

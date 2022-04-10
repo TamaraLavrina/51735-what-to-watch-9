@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { CardType } from '../../types/types';
 import { TABS } from '../../const/const';
-import OverviewTab from '../movie-tabs/movie-overview-tab';
-import DetailsTab from '../movie-tabs/movie-details-tab';
-import ReviewTab from '../movie-tabs/movie-review-tab';
+import OverviewTab from '../movie-tabs/overview-tab';
+import DetailsTab from '../movie-tabs/details-tab';
+import ReviewTab from '../movie-tabs/review-tab';
 import cn from 'classnames';
 
 type MovieNavTabsProps = {
