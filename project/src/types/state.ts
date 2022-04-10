@@ -1,4 +1,26 @@
-import {store} from '../store/index';
+import { store } from '../store/index';
+import { AuthorizationStatusName } from '../const/const';
+import { CardType, ReviewType } from './types';
+
+export type userType = {
+  authorizationStatus: AuthorizationStatusName;
+  activeGenre: string;
+  shownFilmsCount: number;
+  userAvatar: string;
+};
+
+export type filmsType = {
+  films: CardType[];
+  currentFilm:CardType | null,
+  promoFilm: CardType | null;
+  similarFilms: CardType[];
+  favoriteFilms: CardType[];
+  isPromoLoaded: boolean,
+  isCatalogLoaded: boolean,
+  comments: ReviewType[],
+  isFavoriteLoaded: boolean,
+  isCurrentFilmLoaded: boolean
+};
 
 export type reviewDataType = {
   isReviewPosted: boolean,

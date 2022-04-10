@@ -1,16 +1,24 @@
-import { ChangeEvent, Fragment, useState } from 'react';
-import { MAX_SCORE } from '../../const/const';
+import { ChangeEvent, Fragment, useState, FormEvent } from 'react';
+import { useParams} from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { MAX_SCORE, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../const/const';
+import { postNewComment } from '../../store/api-actions';
+import { getIsReviewPosted } from '../../store/reviews/selectors';
+
 
 function ReviewForm() :JSX.Element {
-  const [comment, setComment] = useState('');
-  const [rating, setRating] = useState<number>(0);
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const [commentState, setCommentState] = useState('');
+  const [ratingState, setRatingState] = useState<number>(0);
+  const isReviewPosted = useAppSelector(getIsReviewPosted);
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(evt.target.value);
+    setCommentState(evt.target.value);
   };
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setRating(Number(evt.target.value));
+    setRatingState(Number(evt.target.value));
   };
 
   const ratingStars = new Array(MAX_SCORE)
@@ -18,8 +26,18 @@ function ReviewForm() :JSX.Element {
     .map((value, index) => (index + 1))
     .reverse();
 
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const filmId = Number(id);
+    const comment = {
+      comment: commentState,
+      rating: ratingState,
+    };
+    dispatch(postNewComment({filmId, comment}));
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form action="#" className="add-review__form" onSubmit={handleSubmit}>
       <div className="rating">
         <div className="rating__stars">
 
@@ -30,7 +48,7 @@ function ReviewForm() :JSX.Element {
                 type="radio"
                 name="rating"
                 value={value}
-                checked ={rating === value}
+                checked ={ratingState === value}
                 onChange ={handleRatingChange}
               />
               <label
@@ -48,13 +66,25 @@ function ReviewForm() :JSX.Element {
           className="add-review__textarea"
           name="review-text"
           id="review-text"
-          placeholder="Review text"
-          value={comment}
+          placeholder="be sure to put a rating. The text of the review must be at least 50 and no more than 400 letters"
+          value={commentState}
           onChange={handleCommentChange}
+          minLength={MIN_REVIEW_LENGTH}
+          maxLength={MAX_REVIEW_LENGTH}
         >
         </textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button
+            className="add-review__btn"
+            type="submit"
+            disabled={
+              ratingState === 0 ||
+              commentState.length < MIN_REVIEW_LENGTH ||
+              commentState.length > MAX_REVIEW_LENGTH ||
+              isReviewPosted
+            }
+          >Post
+          </button>
         </div>
       </div>
     </form>

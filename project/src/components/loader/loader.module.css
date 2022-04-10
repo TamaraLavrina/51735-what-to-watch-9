@@ -1,3 +1,33 @@
+.header {
+  position: relative;
+text-align: center;
+  margin: 150px auto 20px;
+  color: white;
+  font-size: 50px;
+  z-index: 1002;
+}
+
+.goHome {
+  position: relative;
+  display: block;
+  width: 50%;
+  margin: 50px auto;
+  padding: 24px 40px;
+  background: 0 0;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  -webkit-transition: border-color .2s;
+  transition: border-color .2s;
+  font-size: 30px;
+  line-height: 44px;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 1002;
+  }
+
+
 .preloader {
   position: fixed;
   left: 0;

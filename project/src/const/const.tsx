@@ -6,6 +6,7 @@ enum AppRoute {
   AddReview = '/films/:id/review',
   Player = '/player/:id',
   NotFound = '/404',
+  CommentsFilm = '/comments',
 }
 
 enum AuthorizationStatusName {
@@ -26,7 +27,7 @@ enum APIRoute {
   Films = '/films',
   Promo = '/promo',
   Favorite = '/favorite',
-  Comments = '/comments/',
+  Comments = '/comments',
   Login = '/login',
   Logout = '/logout',
 }
@@ -37,12 +38,15 @@ enum HttpCode {
   NotFound = 404,
 }
 
+
 enum NameSpace {
   films = 'FILMS',
   reviews = 'REVIEWS',
   user = 'USER',
 }
 
+const MAX_REVIEW_LENGTH = 400;
+const MIN_REVIEW_LENGTH = 50;
 
 export {
   AppRoute,
@@ -56,5 +60,7 @@ export {
   GENRES_MAX_COUNT,
   HttpCode,
   APIRoute,
+  MAX_REVIEW_LENGTH,
+  MIN_REVIEW_LENGTH,
   NameSpace
 };

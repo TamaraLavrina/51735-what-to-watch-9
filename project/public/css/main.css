@@ -1029,6 +1029,10 @@ main {
   margin-left: auto; }
 
 .player__toggler {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
   display: block;
   width: 17px;
   height: 17px;
